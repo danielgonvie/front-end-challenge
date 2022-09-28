@@ -1,3 +1,4 @@
+import { FeaturedSongs as FeaturedSongsView } from '$/components/FeaturedSongs';
 import { SearchInput as DefaultSearchInput } from '$/components/SearchInput';
 import styled from 'styled-components';
 
@@ -7,4 +8,9 @@ export const Container = styled.article`
 
 export const SearchInput = styled(DefaultSearchInput)`
   margin-block-start: 1.375rem;
+  margin: 2.5rem 0rem;
+`;
+
+export const FeaturedSongs = styled(FeaturedSongsView)`
+  margin: 0px;
 `;

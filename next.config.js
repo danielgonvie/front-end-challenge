@@ -16,4 +16,8 @@ module.exports = withImages({
     // We don't lint during the build because GitHub actions performs its own lint step
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
 });

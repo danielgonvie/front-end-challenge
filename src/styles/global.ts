@@ -8,7 +8,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    font-family: 'Jakarta', -apple-system, BlinkMacSystemFont, "Segoe UI",
+    // Removed Jakarta, problems with windows spacing.
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;

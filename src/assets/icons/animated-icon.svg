@@ -1,0 +1,7 @@
+    <svg id="animated" xmlns="http://www.w3.org/2000/svg" width="36" height="22" viewBox="0 0 36 22">
+      <g>
+        <rect id="animated-left" width="8" height="22"/>
+        <rect id="animated-middle" width="8" height="22" x="14"/>
+        <rect id="animated-right" width="8" height="22" x="28"/>
+      </g>
+    </svg>

@@ -9,6 +9,7 @@ export const Container = styled.div`
 
 export const SideMenu = styled(DefaultSideMenu)`
   flex-shrink: 0;
+  height: 100%;
 `;
 
 export const Main = styled.main`
@@ -16,7 +17,8 @@ export const Main = styled.main`
   justify-content: center;
   width: 100%;
   padding-inline: 2.5rem;
-
+  max-height: 100vh;
+  overflow-y: auto;
   ${from['tabletLandscape']} {
     padding-inline: 6rem;
   }
