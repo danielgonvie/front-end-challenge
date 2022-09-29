@@ -77,7 +77,7 @@ export const AnimatedIcon = styled(animated)`
   margin-right: auto;
   margin: auto;
   width: 100%; /* Need a specific value to work */
-  fill:white;
+  fill: white;
 
   & #animated-left {
     animation: ${playingAnimated} 1s linear 0.1s infinite;
