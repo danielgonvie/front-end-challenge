@@ -7,12 +7,22 @@ import { Props, Song } from './types';
 
 export const FeaturedSongs = React.forwardRef<HTMLDivElement, Props>(
   (
-    { className, allSongs, handleSort, handleLiked, handlePlay, ...props },
+    {
+      className,
+      allSongs,
+      likedSongs,
+      handleSort,
+      handleLiked,
+      handlePlay,
+      ...props
+    },
     ref,
   ) => {
     const [songs, setSongs] = React.useState(allSongs);
 
-    useEffect(() => setSongs(allSongs), [allSongs]);
+    useEffect(() => {
+       setSongs(allSongs), [allSongs, likedSongs];
+    });
 
     if (songs.length === 0) {
       return <h2>No hay canciones disponibles.</h2>;
@@ -30,6 +40,7 @@ export const FeaturedSongs = React.forwardRef<HTMLDivElement, Props>(
           <SongCard
             key={song.id}
             songData={song}
+            likedSongs={likedSongs}
             onChangeLiked={(id, liked) => handleLiked(id, liked)}
             onChangePlay={(id, playing) => handlePlay(id, playing)}
             isPlaying={song.isPlaying}

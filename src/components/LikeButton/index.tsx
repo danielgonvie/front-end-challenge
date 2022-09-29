@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Container, LikedButton, UnlikedButton } from './styles';
 import { Props } from './types';
@@ -11,6 +11,10 @@ export const LikeButton = React.forwardRef<HTMLDivElement, Props>(
       setLiked(!liked);
       return pressedLike(liked);
     }
+
+    useEffect(() => {
+      setLiked(isLiked);
+    }, [isLiked]);
 
     return (
       <Container className={className} onClick={likeChanged}>

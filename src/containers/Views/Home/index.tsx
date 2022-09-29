@@ -2,7 +2,7 @@ import { Text } from '$/components/Text';
 import { useGetSongs } from '$/services/SongService';
 import React, { useEffect } from 'react';
 
-import { Container, FeaturedSongs, SearchInput } from './styles';
+import { Container, FeaturedSongs, MusicPlayer, SearchInput } from './styles';
 import { AppState, Data, Song } from './types';
 
 function HomeView(): JSX.Element {
@@ -12,7 +12,7 @@ function HomeView(): JSX.Element {
     sortedBy: 'name',
     likedSongs: [] as number[],
     currentPlaying: {} as Song,
-    currentTime: 0,
+    currentTime: 0
   });
 
   const result: Song[] | object | undefined = useGetSongs();
@@ -44,7 +44,12 @@ function HomeView(): JSX.Element {
         liked: checkLiked(song),
         isPlaying: false,
       }));
-      setAppState({ ...appState, songs: sortMethod(auxArr) });
+      setAppState({
+        ...appState,
+        songs: sortMethod(auxArr),
+        currentPlaying: auxArr[0],
+        likedSongs: JSON.parse(localStorage.getItem('likedSongs')),
+      });
     }
   }, [result.loading]);
 
@@ -110,8 +115,16 @@ function HomeView(): JSX.Element {
       <FeaturedSongs
         allSongs={appState.songs}
         handleSort={onChangeSort}
+        likedSongs={appState.likedSongs}
         handleLiked={(id, liked) => onChangeLiked(id, liked)}
         handlePlay={(id, playing) => onChangePlay(id, playing)}
+      />
+      <MusicPlayer
+        allSongs={appState.songs}
+        likedSongs={appState.likedSongs}
+        handleLiked={(id, liked) => onChangeLiked(id, liked)}
+        currentSong={appState.currentPlaying}
+        currentTime={appState.currentTime}
       />
     </Container>
   );

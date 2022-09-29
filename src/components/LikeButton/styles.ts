@@ -25,7 +25,7 @@ export const LikedButton = styled(Liked)`
   transform-origin: center;
 
   &:hover {
-    filter: drop-shadow(0 0 2px #1b5e20);
+    filter: drop-shadow(0 0 2px #bf508b);
   }
 `;
 

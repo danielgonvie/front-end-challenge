@@ -18,11 +18,15 @@ import {
 import { Props } from './types';
 
 export const SongCard = React.forwardRef<HTMLDivElement, Props>(
-  ({ className, songData, onChangeLiked, onChangePlay }, ref) => {
+  ({ className, songData, likedSongs, onChangeLiked, onChangePlay }, ref) => {
     const [songTime, setSongTime] = React.useState('0');
     const [song, setSong] = React.useState(songData);
 
-    useEffect(() => setSong(songData), [songData]);
+    useEffect(() => {
+      const songCopy = { ...songData };
+      songCopy.liked = likedSongs.some((id) => id === songCopy.id);
+      setSong(songCopy);
+    }, [songData, likedSongs]);
 
     const au = document.createElement('audio');
     au.src = song.audio.url;

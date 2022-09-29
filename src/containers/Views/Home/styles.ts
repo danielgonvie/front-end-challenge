@@ -1,5 +1,6 @@
 import { FeaturedSongs as FeaturedSongsView } from '$/components/FeaturedSongs';
 import { SearchInput as DefaultSearchInput } from '$/components/SearchInput';
+import { MusicPlayer as DefaultMusicPlayer } from '$/components/MusicPlayer';
 import styled from 'styled-components';
 
 export const Container = styled.article`
@@ -13,4 +14,8 @@ export const SearchInput = styled(DefaultSearchInput)`
 
 export const FeaturedSongs = styled(FeaturedSongsView)`
   margin: 0px;
+`;
+
+export const MusicPlayer = styled(DefaultMusicPlayer)`
+  position: absolute;
 `;
