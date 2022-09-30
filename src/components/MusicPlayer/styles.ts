@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { PlayerIcon as PlayerIconDefault } from '$/components/PlayerIcon';
 import { PrevButton as PrevButtonDefault } from '$/components/PrevButton';
 import { NextButton as NextButtonDefault } from '$/components/NextButton';
+import { AudioPlayer as AudioPlayerDefault } from '$/components/AudioPlayer';
 
 
 export const Container = styled.div`
@@ -56,4 +57,8 @@ export const NextButton = styled(NextButtonDefault)`
   & span {
     color: white;
   }
+`;
+
+export const AudioPlayer = styled(AudioPlayerDefault)`
+
 `;

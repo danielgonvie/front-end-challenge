@@ -2,7 +2,16 @@ import { LikeButton } from '$/components/LikeButton';
 import { Text } from '$/components/Text';
 import React, { useEffect } from 'react';
 
-import { Container, SongInfo, Thumbnail, ThumbnailCover, PlayerIcon, PrevButton, NextButton } from './styles';
+import {
+  AudioPlayer,
+  Container,
+  NextButton,
+  PlayerIcon,
+  PrevButton,
+  SongInfo,
+  Thumbnail,
+  ThumbnailCover,
+} from './styles';
 import { Props, Song } from './types';
 
 export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
@@ -70,6 +79,7 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
           pressedPlay={(e) => playHasChange(e)}
         />
         <NextButton pressedNext={handleNext} />
+        <AudioPlayer currentTime={currentTime} currentSong={song} />
       </Container>
     );
   },
