@@ -18,6 +18,6 @@ export type Props = {
   likedSongs: number[];
   handleLiked: (a: number, b: boolean) => void;
   handlePlay: (a: number, b: boolean) => void;
-  handlePrev: () => void;
-  handleNext: () => void;
+  handlePrev: (id: number) => void;
+  handleNext: (id: number) => void;
 };

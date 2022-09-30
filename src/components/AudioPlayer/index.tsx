@@ -11,20 +11,14 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     const [songDuration, setSongDuration] = React.useState(0);
     const [songCurrentTime, setSongCurrentTime] = React.useState(0);
 
-    console.log(currentSong, 'Que llega al audio player');
-    console.log('Prueba');
+    function startTimer(e: React.ChangeEvent<HTMLInputElement>) {
+      //////COMENZAR TIMER
+      const au = document.querySelector('#main-audio') as HTMLAudioElement;
 
-    useEffect(() => {
-      const au = document.getElementById('main-audio') as HTMLAudioElement;
-      au.src = song.audio.url;
-      au.addEventListener(
-        'loadedmetadata',
-        function () {
-          setSongDuration(au.duration);
-        },
-        false,
-      );
-    }, [song.audio.url]);
+      setInterval(() => {
+        setSongCurrentTime(au.currentTime);
+      }, 1000);
+    }
 
     function parseTime(time: number) {
       const totalNumberOfSeconds = Math.floor(time);
@@ -40,8 +34,50 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     }
 
     function updateTime(e: React.ChangeEvent<HTMLInputElement>) {
+      const au = document.querySelector('#main-audio') as HTMLAudioElement;
+      au.currentTime = +e.target.value;
       setSongCurrentTime(+e.target.value);
     }
+
+    useEffect(() => {
+      const au = document.getElementById('main-audio') as HTMLAudioElement;
+      au.src = song.audio.url;
+      au.addEventListener(
+        'loadedmetadata',
+        function () {
+          setSongDuration(au.duration);
+        },
+        false,
+      );
+      au.removeEventListener(
+        'loadedmetadata',
+        function () {
+          setSongDuration(au.duration);
+        },
+        false,
+      );
+
+      if (song.isPlaying) {
+        au.play();
+        startTimer();
+      } else {
+        au.pause();
+      }
+    }, [song]);
+
+    useEffect(() => {
+      console.log(
+        'Se ha enterado del cambio de cancion el audioplayer',
+        currentSong,
+      );
+      const au = document.getElementById('main-audio') as HTMLAudioElement;
+      const range = document.querySelector(
+        'input[type="range"]',
+      ) as HTMLInputElement;
+      range.value = '0';
+      setSong(currentSong);
+      setSongCurrentTime(0);
+    }, [currentSong]);
 
     return (
       <Container>
@@ -49,9 +85,10 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
         <Timer>{parseTime(songCurrentTime)}</Timer>
         <SongRange
           type="range"
-          max={songDuration}
+          max={Math.floor(songDuration)}
           min="0"
           onChange={(e) => updateTime(e)}
+          value={songCurrentTime}
         />
         <Timer>{parseTime(songDuration)}</Timer>
       </Container>

@@ -75,33 +75,45 @@ function HomeView(): JSX.Element {
     setAppState({ ...appState, sortedBy: sort });
   }
 
-  function pressedPrev() {
+  function pressedPrev(id:number) {
     const actualSongId = appState.currentPlaying.id;
     const actualIndex = result.findIndex((song) => song.id === actualSongId);
 
     if (actualIndex === 0) {
-      const nextSong = result[result.length - 1];
+      const nextSong = { ...result[result.length - 1] };
+      nextSong.isPlaying = true;
       return setAppState({ ...appState, currentPlaying: nextSong });
     }
+    const nextSong = { ...result[actualIndex - 1] };
+    nextSong.isPlaying = true;
 
     return setAppState({
       ...appState,
-      currentPlaying: result[actualIndex - 1],
+      currentPlaying: nextSong,
     });
   }
 
-  function pressedNext() {
+  function pressedNext(id: number) {
     const actualSongId = appState.currentPlaying.id;
     const actualIndex = result.findIndex((song) => song.id === actualSongId);
 
-    if (actualIndex === result.length - 1) {
-      const nextSong = result[0];
-      return setAppState({ ...appState, currentPlaying: nextSong });
-    }
+    console.log(id, "CHIMICHANGA")
+    let songsCopy = [...appState.songs];
+    songsCopy[actualIndex].isPlaying = false;
 
+    if (actualIndex === result.length - 1) {
+      const nextSong = { ...result[0] };
+      nextSong.isPlaying = true;
+      songsCopy[0].isPlaying = true;
+      return setAppState({ ...appState, songs: songsCopy, currentPlaying: nextSong });
+    }
+    const nextSong = { ...result[actualIndex + 1] };
+    nextSong.isPlaying = true;
+    songsCopy[actualIndex + 1].isPlaying = true;
     return setAppState({
       ...appState,
-      currentPlaying: result[actualIndex + 1],
+      songs: songsCopy,
+      currentPlaying: nextSong,
     });
   }
 
@@ -154,8 +166,8 @@ function HomeView(): JSX.Element {
         likedSongs={appState.likedSongs}
         handleLiked={(id, liked) => onChangeLiked(id, liked)}
         handlePlay={(id, playing) => onChangePlay(id, playing)}
-        handlePrev={pressedPrev}
-        handleNext={pressedNext}
+        handlePrev={(id) => pressedPrev(id)}
+        handleNext={(id) => pressedNext(id)}
         currentSong={appState.currentPlaying}
         currentTime={appState.currentTime}
       />

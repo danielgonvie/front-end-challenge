@@ -18,4 +18,5 @@ export const FeaturedSongs = styled(FeaturedSongsView)`
 
 export const MusicPlayer = styled(DefaultMusicPlayer)`
   position: absolute;
+
 `;

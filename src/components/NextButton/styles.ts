@@ -12,6 +12,6 @@ export const Container = styled.div`
 
 export const NextIcon = styled.span`
   color: ${({ theme }) => theme.color.white};
-  font-size: 1rem;
+  font-size: 2rem;
   user-select: none;
 `;
