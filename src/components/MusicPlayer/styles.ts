@@ -1,11 +1,14 @@
 import styled from 'styled-components';
+import { PlayerIcon as PlayerIconDefault } from '$/components/PlayerIcon';
+import { PrevButton as PrevButtonDefault } from '$/components/PrevButton';
+import { NextButton as NextButtonDefault } from '$/components/NextButton';
+
 
 export const Container = styled.div`
   position: fixed;
   bottom: 0;
   right: 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   height: 5rem;
   width: 100vw;
@@ -34,4 +37,23 @@ export const ThumbnailCover = styled.img`
 
 export const SongInfo = styled.div`
 
+`;
+
+export const PlayerIcon = styled(PlayerIconDefault)`
+  background-color: white;
+  & span {
+    color: black;
+  }
+`;
+
+export const PrevButton = styled(PrevButtonDefault)`
+  & span {
+    color: white;
+  }
+`;
+
+export const NextButton = styled(NextButtonDefault)`
+  & span {
+    color: white;
+  }
 `;

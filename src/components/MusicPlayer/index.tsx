@@ -2,7 +2,7 @@ import { LikeButton } from '$/components/LikeButton';
 import { Text } from '$/components/Text';
 import React, { useEffect } from 'react';
 
-import { Container, SongInfo, Thumbnail, ThumbnailCover } from './styles';
+import { Container, SongInfo, Thumbnail, ThumbnailCover, PlayerIcon, PrevButton, NextButton } from './styles';
 import { Props, Song } from './types';
 
 export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
@@ -14,6 +14,8 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
       likedSongs,
       handleLiked,
       handlePlay,
+      handlePrev,
+      handleNext,
       ...props
     },
     ref,
@@ -22,6 +24,11 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
 
     function likeHasChange(liked: boolean) {
       handleLiked(currentSong.id, liked);
+    }
+
+    function playHasChange(playing: boolean) {
+      setSong({ ...song, isPlaying: playing });
+      handlePlay(song.id, playing);
     }
 
     useEffect(() => {
@@ -57,7 +64,12 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
             {song.author.name}
           </Text>
         </SongInfo>
-        <h3> big media control</h3>
+        <PrevButton pressedPrev={handlePrev} />
+        <PlayerIcon
+          isPlaying={song.isPlaying}
+          pressedPlay={(e) => playHasChange(e)}
+        />
+        <NextButton pressedNext={handleNext} />
       </Container>
     );
   },

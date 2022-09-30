@@ -17,5 +17,7 @@ export type Props = {
   currentTime: number;
   likedSongs: number[];
   handleLiked: (a: number, b: boolean) => void;
-  handlePlay?: (a: number, b: boolean) => void;
+  handlePlay: (a: number, b: boolean) => void;
+  handlePrev: () => void;
+  handleNext: () => void;
 };

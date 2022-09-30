@@ -12,7 +12,7 @@ function HomeView(): JSX.Element {
     sortedBy: 'name',
     likedSongs: [] as number[],
     currentPlaying: {} as Song,
-    currentTime: 0
+    currentTime: 0,
   });
 
   const result: Song[] | object | undefined = useGetSongs();
@@ -75,6 +75,36 @@ function HomeView(): JSX.Element {
     setAppState({ ...appState, sortedBy: sort });
   }
 
+  function pressedPrev() {
+    const actualSongId = appState.currentPlaying.id;
+    const actualIndex = result.findIndex((song) => song.id === actualSongId);
+
+    if (actualIndex === 0) {
+      const nextSong = result[result.length - 1];
+      return setAppState({ ...appState, currentPlaying: nextSong });
+    }
+
+    return setAppState({
+      ...appState,
+      currentPlaying: result[actualIndex - 1],
+    });
+  }
+
+  function pressedNext() {
+    const actualSongId = appState.currentPlaying.id;
+    const actualIndex = result.findIndex((song) => song.id === actualSongId);
+
+    if (actualIndex === result.length - 1) {
+      const nextSong = result[0];
+      return setAppState({ ...appState, currentPlaying: nextSong });
+    }
+
+    return setAppState({
+      ...appState,
+      currentPlaying: result[actualIndex + 1],
+    });
+  }
+
   function onChangeLiked(id: number, liked: boolean) {
     const arrCopy: number[] =
       JSON.parse(localStorage.getItem('likedSongs')) !== null
@@ -123,6 +153,9 @@ function HomeView(): JSX.Element {
         allSongs={appState.songs}
         likedSongs={appState.likedSongs}
         handleLiked={(id, liked) => onChangeLiked(id, liked)}
+        handlePlay={(id, playing) => onChangePlay(id, playing)}
+        handlePrev={pressedPrev}
+        handleNext={pressedNext}
         currentSong={appState.currentPlaying}
         currentTime={appState.currentTime}
       />
