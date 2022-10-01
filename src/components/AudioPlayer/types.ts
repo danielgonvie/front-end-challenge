@@ -10,18 +10,8 @@ export type Song = {
   isPlaying: boolean;
 };
 
-export type AppState = {
-  songs: Song[];
-  searchQuery: string;
-  likedSongs: number[];
-  sortedBy: string;
-  currentPlaying: Song;
-  currentTime: number;
+export type Props = {
+  className?: string;
+  currentSong: Song;
   isPlaying: boolean;
-};
-
-export type Data = {
-  songs: {
-    songs: [Song];
-  };
 };

@@ -16,6 +16,7 @@ export type Props = HTMLAttributes<HTMLDivElement> & {
   className?: string;
   songData: Song;
   isPlaying: boolean;
+  likedSongs: number[];
   onChangeLiked: (a: number, b: boolean) => void;
   onChangePlay: (a: number, b: boolean) => void;
 };

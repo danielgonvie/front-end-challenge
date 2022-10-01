@@ -2,7 +2,7 @@ import { Text } from '$/components/Text';
 import { useGetSongs } from '$/services/SongService';
 import React, { useEffect } from 'react';
 
-import { Container, FeaturedSongs, SearchInput } from './styles';
+import { Container, FeaturedSongs, MusicPlayer, SearchInput } from './styles';
 import { AppState, Data, Song } from './types';
 
 function HomeView(): JSX.Element {
@@ -13,6 +13,7 @@ function HomeView(): JSX.Element {
     likedSongs: [] as number[],
     currentPlaying: {} as Song,
     currentTime: 0,
+    isPlaying: false,
   });
 
   const result: Song[] | object | undefined = useGetSongs();
@@ -44,7 +45,12 @@ function HomeView(): JSX.Element {
         liked: checkLiked(song),
         isPlaying: false,
       }));
-      setAppState({ ...appState, songs: sortMethod(auxArr) });
+      setAppState({
+        ...appState,
+        songs: sortMethod(auxArr),
+        currentPlaying: auxArr[0],
+        likedSongs: JSON.parse(localStorage.getItem('likedSongs')),
+      });
     }
   }, [result.loading]);
 
@@ -68,6 +74,48 @@ function HomeView(): JSX.Element {
 
   function onChangeSort(sort: string) {
     setAppState({ ...appState, sortedBy: sort });
+  }
+
+  function pressedPrev(id:number) {
+    const actualSongId = appState.currentPlaying.id;
+    const actualIndex = result.findIndex((song) => song.id === actualSongId);
+
+    if (actualIndex === 0) {
+      const nextSong = { ...result[result.length - 1] };
+      nextSong.isPlaying = true;
+      return setAppState({ ...appState, currentPlaying: nextSong });
+    }
+    const nextSong = { ...result[actualIndex - 1] };
+    nextSong.isPlaying = true;
+
+    return setAppState({
+      ...appState,
+      currentPlaying: nextSong,
+    });
+  }
+
+  function pressedNext(id: number) {
+    const actualSongId = appState.currentPlaying.id;
+    const actualIndex = result.findIndex((song) => song.id === actualSongId);
+
+    console.log(id, "CHIMICHANGA")
+    let songsCopy = [...appState.songs];
+    songsCopy[actualIndex].isPlaying = false;
+
+    if (actualIndex === result.length - 1) {
+      const nextSong = { ...result[0] };
+      nextSong.isPlaying = true;
+      songsCopy[0].isPlaying = true;
+      return setAppState({ ...appState, songs: songsCopy, currentPlaying: nextSong });
+    }
+    const nextSong = { ...result[actualIndex + 1] };
+    nextSong.isPlaying = true;
+    songsCopy[actualIndex + 1].isPlaying = true;
+    return setAppState({
+      ...appState,
+      songs: songsCopy,
+      currentPlaying: nextSong,
+    });
   }
 
   function onChangeLiked(id: number, liked: boolean) {
@@ -110,8 +158,20 @@ function HomeView(): JSX.Element {
       <FeaturedSongs
         allSongs={appState.songs}
         handleSort={onChangeSort}
+        likedSongs={appState.likedSongs}
         handleLiked={(id, liked) => onChangeLiked(id, liked)}
         handlePlay={(id, playing) => onChangePlay(id, playing)}
+      />
+      <MusicPlayer
+        allSongs={appState.songs}
+        likedSongs={appState.likedSongs}
+        handleLiked={(id, liked) => onChangeLiked(id, liked)}
+        handlePlay={(id, playing) => onChangePlay(id, playing)}
+        handlePrev={(id) => pressedPrev(id)}
+        handleNext={(id) => pressedNext(id)}
+        currentSong={appState.currentPlaying}
+        currentTime={appState.currentTime}
+        isPlaying={appState.isPlaying}
       />
     </Container>
   );

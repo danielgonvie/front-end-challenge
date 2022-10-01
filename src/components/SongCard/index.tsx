@@ -18,11 +18,16 @@ import {
 import { Props } from './types';
 
 export const SongCard = React.forwardRef<HTMLDivElement, Props>(
-  ({ className, songData, onChangeLiked, onChangePlay }, ref) => {
+  ({ className, songData, likedSongs, onChangeLiked, onChangePlay }, ref) => {
     const [songTime, setSongTime] = React.useState('0');
     const [song, setSong] = React.useState(songData);
 
-    useEffect(() => setSong(songData), [songData]);
+    useEffect(() => {
+      console.log("see ha enterado del cambio de pista?")
+      const songCopy = { ...songData };
+      songCopy.liked = likedSongs.some((id) => id === songCopy.id);
+      setSong(songCopy);
+    }, [songData, likedSongs]);
 
     const au = document.createElement('audio');
     au.src = song.audio.url;
@@ -30,7 +35,7 @@ export const SongCard = React.forwardRef<HTMLDivElement, Props>(
       'loadedmetadata',
       function () {
         const duration = au.duration;
-        const totalNumberOfSeconds = Math.floor(duration);
+        const totalNumberOfSeconds = Math.round(duration);
         const hours = Math.floor(totalNumberOfSeconds / 3600);
         const minutes = Math.floor((totalNumberOfSeconds - hours * 3600) / 60);
         const seconds = Math.floor(

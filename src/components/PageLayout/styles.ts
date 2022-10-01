@@ -17,7 +17,7 @@ export const Main = styled.main`
   justify-content: center;
   width: 100%;
   padding-inline: 2.5rem;
-  max-height: 100vh;
+  max-height: calc(100vh - 5rem);
   overflow-y: auto;
   ${from['tabletLandscape']} {
     padding-inline: 6rem;

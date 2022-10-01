@@ -13,8 +13,12 @@ export type Song = {
 export type Props = {
   allSongs: Song[];
   className?: string;
+  currentSong: Song;
+  currentTime: number;
   likedSongs: number[];
-  handleSort: (a: string) => void;
+  isPlaying: boolean;
   handleLiked: (a: number, b: boolean) => void;
   handlePlay: (a: number, b: boolean) => void;
+  handlePrev: (id: number) => void;
+  handleNext: (id: number) => void;
 };
