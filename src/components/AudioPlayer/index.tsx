@@ -68,10 +68,6 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     }, [song]);
 
     useEffect(() => {
-      console.log(
-        'Se ha enterado del cambio de cancion el audioplayer',
-        currentSong,
-      );
       const au = document.getElementById('main-audio') as HTMLAudioElement;
       const range = document.querySelector(
         'input[type="range"]',

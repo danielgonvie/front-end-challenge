@@ -23,7 +23,6 @@ export const SongCard = React.forwardRef<HTMLDivElement, Props>(
     const [song, setSong] = React.useState(songData);
 
     useEffect(() => {
-      console.log("see ha enterado del cambio de pista?")
       const songCopy = { ...songData };
       songCopy.liked = likedSongs.some((id) => id === songCopy.id);
       setSong(songCopy);

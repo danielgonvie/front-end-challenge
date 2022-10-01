@@ -33,10 +33,6 @@ function HomeView(): JSX.Element {
         );
   }
 
-  function playCurrentSong() {
-    console.log('playing', appState.currentPlaying);
-  }
-
   useEffect(() => {
     if (!result.loading) {
       let auxArr: Song[] = [...result];
@@ -58,10 +54,6 @@ function HomeView(): JSX.Element {
     const auxArr = appState.songs;
     setAppState({ ...appState, songs: sortMethod(auxArr) });
   }, [appState.sortedBy]);
-
-  useEffect(() => {
-    playCurrentSong();
-  }, [appState.currentPlaying]);
 
   function onFilterQuery(filter: string) {
     const filteredArr: Song[] = result.filter((song: Song) =>
@@ -98,7 +90,6 @@ function HomeView(): JSX.Element {
     const actualSongId = appState.currentPlaying.id;
     const actualIndex = result.findIndex((song) => song.id === actualSongId);
 
-    console.log(id, "CHIMICHANGA")
     let songsCopy = [...appState.songs];
     songsCopy[actualIndex].isPlaying = false;
 
