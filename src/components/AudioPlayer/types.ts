@@ -13,4 +13,5 @@ export type Song = {
 export type Props = {
   className?: string;
   currentSong: Song;
+  isPlaying: boolean;
 };

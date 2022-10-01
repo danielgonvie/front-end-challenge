@@ -23,6 +23,7 @@ export const SongCard = React.forwardRef<HTMLDivElement, Props>(
     const [song, setSong] = React.useState(songData);
 
     useEffect(() => {
+      console.log("see ha enterado del cambio de pista?")
       const songCopy = { ...songData };
       songCopy.liked = likedSongs.some((id) => id === songCopy.id);
       setSong(songCopy);
@@ -34,7 +35,7 @@ export const SongCard = React.forwardRef<HTMLDivElement, Props>(
       'loadedmetadata',
       function () {
         const duration = au.duration;
-        const totalNumberOfSeconds = Math.floor(duration);
+        const totalNumberOfSeconds = Math.round(duration);
         const hours = Math.floor(totalNumberOfSeconds / 3600);
         const minutes = Math.floor((totalNumberOfSeconds - hours * 3600) / 60);
         const seconds = Math.floor(

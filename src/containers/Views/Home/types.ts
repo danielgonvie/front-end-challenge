@@ -17,6 +17,7 @@ export type AppState = {
   sortedBy: string;
   currentPlaying: Song;
   currentTime: number;
+  isPlaying: boolean;
 };
 
 export type Data = {

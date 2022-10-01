@@ -36,7 +36,7 @@ export const FeaturedSongs = React.forwardRef<HTMLDivElement, Props>(
           </Text>
           <Dropdown onChangeSort={handleSort} />
         </FlexContainer>
-        {allSongs.map((song) => (
+        {songs.map((song) => (
           <SongCard
             key={song.id}
             songData={song}

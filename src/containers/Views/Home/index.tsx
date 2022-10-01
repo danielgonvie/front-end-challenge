@@ -13,6 +13,7 @@ function HomeView(): JSX.Element {
     likedSongs: [] as number[],
     currentPlaying: {} as Song,
     currentTime: 0,
+    isPlaying: false,
   });
 
   const result: Song[] | object | undefined = useGetSongs();
@@ -170,6 +171,7 @@ function HomeView(): JSX.Element {
         handleNext={(id) => pressedNext(id)}
         currentSong={appState.currentPlaying}
         currentTime={appState.currentTime}
+        isPlaying={appState.isPlaying}
       />
     </Container>
   );

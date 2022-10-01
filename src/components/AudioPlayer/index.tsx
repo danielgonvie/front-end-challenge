@@ -6,10 +6,12 @@ import { Container, MainAudio, SongRange, Timer } from './styles';
 import { Props, Song } from './types';
 
 export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
-  ({ className, currentSong }, ref) => {
+  ({ className, isPlaying, currentSong }, ref) => {
     const [song, setSong] = React.useState<Song>(currentSong);
     const [songDuration, setSongDuration] = React.useState(0);
     const [songCurrentTime, setSongCurrentTime] = React.useState(0);
+    const [playing, setplaying] = React.useState(isPlaying);
+
 
     function startTimer(e: React.ChangeEvent<HTMLInputElement>) {
       //////COMENZAR TIMER
@@ -21,7 +23,7 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     }
 
     function parseTime(time: number) {
-      const totalNumberOfSeconds = Math.floor(time);
+      const totalNumberOfSeconds = Math.round(time);
       const hours = Math.floor(totalNumberOfSeconds / 3600);
       const minutes = Math.floor((totalNumberOfSeconds - hours * 3600) / 60);
       const seconds = Math.floor(

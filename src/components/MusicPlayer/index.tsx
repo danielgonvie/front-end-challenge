@@ -23,6 +23,7 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
       currentSong,
       currentTime,
       likedSongs,
+      isPlaying,
       handleLiked,
       handlePlay,
       handlePrev,
@@ -32,14 +33,15 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
     ref,
   ) => {
     const [song, setSong] = React.useState<Song>(currentSong);
+    const [playing, setPlaying] = React.useState(isPlaying);
 
     function likeHasChange(liked: boolean) {
       handleLiked(currentSong.id, liked);
     }
 
-    function playHasChange(playing: boolean) {
-      setSong({ ...song, isPlaying: playing });
-      handlePlay(song.id, playing);
+    function playHasChange(isPlaying: boolean) {
+      setPlaying(isPlaying);
+      handlePlay(song.id, isPlaying);
     }
 
     useEffect(() => {
@@ -85,7 +87,11 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
           />
           <NextButton pressedNext={() => handleNext(song.id)} />
         </ContainerControl>
-        <AudioPlayer currentTime={currentTime} currentSong={song} />
+        <AudioPlayer
+          currentTime={currentTime}
+          currentSong={song}
+          isPlaying={playing}
+        />
       </Container>
     );
   },
