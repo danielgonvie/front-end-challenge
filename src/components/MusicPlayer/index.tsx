@@ -8,6 +8,7 @@ import {
   playHasChange,
 } from '$/utils/helpers/commonHelper';
 import React, { useContext } from 'react';
+import { LoadingState } from '../LoadingState';
 
 import {
   AudioPlayer,
@@ -33,9 +34,7 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
     if (!currentPlaying.hasOwnProperty('author')) {
       return (
         <Container>
-          <Text tag="h3" variant="bodyBold">
-            Cargando...
-          </Text>
+          <LoadingState />
         </Container>
       );
     }

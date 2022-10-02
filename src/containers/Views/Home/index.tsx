@@ -1,10 +1,12 @@
+import { LoadingState } from '$/components/LoadingState';
 import { Text } from '$/components/Text';
 import { AppContext } from '$/context/AppContext';
 import { Song } from '$/context/types';
 import { useGetSongs } from '$/services/SongService';
-import { checkLiked, filterAndSort } from '$/utils/helpers/commonHelper';
+import { filterAndSort } from '$/utils/helpers/commonHelper';
 import { ApolloError } from '@apollo/client';
 import React, { useContext, useEffect } from 'react';
+import { ErrorState } from '../../../components/ErrorState';
 
 import { Container, FeaturedSongs, MusicPlayer, SearchInput } from './styles';
 
@@ -23,7 +25,8 @@ function HomeView(): JSX.Element {
     | undefined = useGetSongs();
 
   useEffect(() => {
-    if (!result.loading) {
+    if (!result.loading && !result.error) {
+      console.log(result)
       let songsRecieved: Song[] = [...result] as Song[];
       songsRecieved = songsRecieved.map((song) => ({
         ...song,
@@ -47,10 +50,10 @@ function HomeView(): JSX.Element {
   }
 
   if (result.loading) {
-    return <h2>Cargando..</h2>;
+    return <LoadingState />;
   }
   if (result.error) {
-    return <h2>Ha habido un problema..</h2>;
+    return <ErrorState errorMessage='Ups! Media Player not available. Try again later!' />;
   }
 
   return (
