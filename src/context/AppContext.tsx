@@ -11,6 +11,7 @@ export const AppContext = createContext<CoreContext>({
   currentPlaying: {} as Song,
   isPlaying: false,
   currentTime: 0,
+  volumeIsOn: true,
   setVanillaSongs: () => {},
   setFilteredSongs: () => {},
   setSearchQuery: () => {},
@@ -19,6 +20,7 @@ export const AppContext = createContext<CoreContext>({
   setCurrentPlaying: () => {},
   setIsPlaying: () => {},
   setCurrentTime: () => {},
+  setVolumeIsOn: () => {},
 });
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -30,6 +32,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [currentPlaying, setCurrentPlaying] = useState({} as Song);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [volumeIsOn, setVolumeIsOn] = useState(0);
 
   return (
     <AppContext.Provider
@@ -50,6 +53,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         setIsPlaying,
         currentTime,
         setCurrentTime,
+        volumeIsOn,
+        setVolumeIsOn,
       }}
     >
       {children}

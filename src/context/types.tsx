@@ -18,6 +18,7 @@ export type CoreContext = {
   currentPlaying: Song;
   isPlaying: boolean;
   currentTime: number;
+  volumeIsOn: boolean;
   setVanillaSongs: (songs: Song[]) => void;
   setFilteredSongs: (songs: Song[]) => void;
   setSearchQuery: (query: string) => void;
@@ -26,4 +27,5 @@ export type CoreContext = {
   setCurrentPlaying: (song: Song) => void;
   setIsPlaying: (isPlaying: boolean) => void;
   setCurrentTime: (time: number) => void;
+  setVolumeIsOn: (isOn: boolean) => void;
 };
