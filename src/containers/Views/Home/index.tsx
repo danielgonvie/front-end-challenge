@@ -40,7 +40,6 @@ function HomeView(): JSX.Element {
   useEffect(() => {
     const sortedAndFiltered = [...vanillaSongs];
     setFilteredSongs(filterAndSort(sortedAndFiltered, sortedBy, searchQuery));
-    console.log('entró en el sort and filter');
   }, [sortedBy, searchQuery, vanillaSongs, setFilteredSongs]);
 
   function onFilterQuery(filter: string) {

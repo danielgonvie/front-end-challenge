@@ -26,9 +26,8 @@ export const filterAndSort = (
     : filteredArr.sort((a, b) => a[sortedBy].localeCompare(b[sortedBy]));
 };
 
-export const getAudioDuration = (audio: HTMLAudioElement) => {
-  const duration: number = audio.duration;
-  const totalNumberOfSeconds = Math.round(duration);
+export const parseTime = (time: number) => {
+  const totalNumberOfSeconds = Math.round(time);
   const hours = Math.floor(totalNumberOfSeconds / 3600);
   const minutes = Math.floor((totalNumberOfSeconds - hours * 3600) / 60);
   const seconds = Math.floor(
@@ -39,6 +38,11 @@ export const getAudioDuration = (audio: HTMLAudioElement) => {
   }`;
 
   return result;
+};
+
+export const getAudioDuration = (audio: HTMLAudioElement) => {
+  const duration: number = audio.duration;
+  return parseTime(duration);
 };
 
 export const likeHasChange = (

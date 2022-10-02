@@ -10,6 +10,7 @@ export const AppContext = createContext<CoreContext>({
   likedSongs: [] as number[],
   currentPlaying: {} as Song,
   isPlaying: false,
+  currentTime: 0,
   setVanillaSongs: () => {},
   setFilteredSongs: () => {},
   setSearchQuery: () => {},
@@ -17,6 +18,7 @@ export const AppContext = createContext<CoreContext>({
   setLikedSongs: () => {},
   setCurrentPlaying: () => {},
   setIsPlaying: () => {},
+  setCurrentTime: () => {},
 });
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -27,6 +29,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [likedSongs, setLikedSongs] = useState([] as number[]);
   const [currentPlaying, setCurrentPlaying] = useState({} as Song);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
 
   return (
     <AppContext.Provider
@@ -45,6 +48,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         setCurrentPlaying,
         isPlaying,
         setIsPlaying,
+        currentTime,
+        setCurrentTime,
       }}
     >
       {children}
