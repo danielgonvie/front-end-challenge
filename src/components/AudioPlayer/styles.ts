@@ -8,6 +8,15 @@ export const Container = styled.div`
 
 export const Timer = styled.span``;
 
+export const VolumeControl = styled.span`
+  margin: 0 1rem;
+  color: white;
+  &:hover {
+    filter: drop-shadow(0px 0px 0.09375rem white);
+    cursor: pointer;
+  }
+`;
+
 export const SongRange = styled.input`
   overflow: hidden;
   display: block;
@@ -50,7 +59,7 @@ export const SongRange = styled.input`
 
   &::-webkit-slider-runnable-track {
     width: 100%;
-    height: 0,3125rem;
+    height: 0, 3125rem;
     cursor: pointer;
 
     border-radius: 0.1rem;

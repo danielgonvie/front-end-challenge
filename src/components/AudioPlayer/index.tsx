@@ -1,8 +1,14 @@
 import { AppContext } from '$/context/AppContext';
-import { parseTime, handleNext } from '$/utils/helpers/commonHelper';
-import React, { useContext, useEffect } from 'react';
+import { handleNext, parseTime } from '$/utils/helpers/commonHelper';
+import React, { useContext, useEffect, useRef } from 'react';
 
-import { Container, MainAudio, SongRange, Timer } from './styles';
+import {
+  Container,
+  MainAudio,
+  SongRange,
+  Timer,
+  VolumeControl,
+} from './styles';
 import { Props } from './types';
 
 export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
@@ -11,7 +17,9 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     const { vanillaSongs } = useContext(AppContext);
     const { isPlaying } = useContext(AppContext);
     const { currentTime, setCurrentTime } = useContext(AppContext);
+    const { volumeIsOn, setVolumeIsOn } = useContext(AppContext);
     const [songDuration, setSongDuration] = React.useState(0);
+    const audioPlayer = useRef(null);
 
     function startTimer(audio: HTMLAudioElement) {
       setInterval(() => {
@@ -20,55 +28,62 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     }
 
     function updateTime(e: React.ChangeEvent<HTMLInputElement>) {
-      const au = document.querySelector('#main-audio') as HTMLAudioElement;
-      au.currentTime = +e.target.value;
+      audioPlayer.current.currentTime = +e.target.value;
       setCurrentTime(+e.target.value);
     }
 
     useEffect(() => {
-      const au = document.getElementById('main-audio') as HTMLAudioElement;
-      au.src = currentPlaying.audio.url;
-      au.addEventListener(
+      audioPlayer.current.src = currentPlaying.audio.url;
+      audioPlayer.current.addEventListener(
         'loadedmetadata',
         () => {
-          setSongDuration(au.duration);
+          setSongDuration(audioPlayer.current.duration);
         },
         { once: true },
       );
 
       if (isPlaying) {
-        au.play()
+        audioPlayer.current
+          .play()
           .then(() => console.log())
           .catch((error) => console.log(error, 'error del play'));
       } else {
-        au.pause();
+        audioPlayer.current.pause();
       }
     }, [currentPlaying]);
 
     useEffect(() => {
-      const au = document.getElementById('main-audio') as HTMLAudioElement;
       if (isPlaying) {
-        au.play()
+        audioPlayer.current
+          .play()
           .then(() => console.log())
           .catch((error) => console.log(error, 'error del play'));
       } else {
-        au.pause();
+        audioPlayer.current.pause();
       }
     }, [isPlaying]);
 
     useEffect(() => {
-      const au = document.getElementById('main-audio') as HTMLAudioElement;
-      currentTime >= au.duration ? handleNext(currentPlaying.id, vanillaSongs, setCurrentPlaying) : '';
+      currentTime >= audioPlayer.current.duration
+        ? handleNext(currentPlaying.id, vanillaSongs, setCurrentPlaying)
+        : '';
     }, [currentTime]);
 
     useEffect(() => {
-      const au = document.getElementById('main-audio') as HTMLAudioElement;
-      startTimer(au);
+      startTimer(audioPlayer.current);
     }, []);
+
+    useEffect(() => {
+      audioPlayer.current.muted = volumeIsOn;
+    }, [volumeIsOn]);
 
     return (
       <Container>
-        <MainAudio id="main-audio" src={currentPlaying.audio.url} />
+        <MainAudio
+          ref={audioPlayer}
+          id="main-audio"
+          src={currentPlaying.audio.url}
+        />
         <Timer>{parseTime(currentTime)}</Timer>
         <SongRange
           type="range"
@@ -78,6 +93,21 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
           value={currentTime}
         />
         <Timer>{parseTime(songDuration)}</Timer>
+        {volumeIsOn ? (
+          <VolumeControl
+            className="material-icons"
+            onClick={() => setVolumeIsOn(false)}
+          >
+            &#xe04f;
+          </VolumeControl>
+        ) : (
+          <VolumeControl
+            className="material-icons"
+            onClick={() => setVolumeIsOn(true)}
+          >
+            &#xe04d;
+          </VolumeControl>
+        )}
       </Container>
     );
   },
