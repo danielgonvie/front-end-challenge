@@ -22,11 +22,6 @@ function HomeView(): JSX.Element {
     | { error: ApolloError; loading?: undefined }
     | undefined = useGetSongs();
 
-  // checkLiked se fue a helpers
-
-  //sortMethod se fue a helpers
-
-  //Depues de obtener la llamada, una vez termine de cargar
   useEffect(() => {
     if (!result.loading) {
       let songsRecieved: Song[] = [...result] as Song[];
@@ -38,10 +33,10 @@ function HomeView(): JSX.Element {
       JSON.parse(localStorage.getItem('likedSongs')) !== null
         ? setLikedSongs(JSON.parse(localStorage.getItem('likedSongs')))
         : '';
+      setCurrentPlaying(songsRecieved[0]);
     }
   }, [result, setVanillaSongs, setFilteredSongs, setLikedSongs]);
 
-  //Cambió sortedBy o searchQuery
   useEffect(() => {
     const sortedAndFiltered = [...vanillaSongs];
     setFilteredSongs(filterAndSort(sortedAndFiltered, sortedBy, searchQuery));
@@ -51,63 +46,6 @@ function HomeView(): JSX.Element {
   function onFilterQuery(filter: string) {
     setSearchQuery(filter);
   }
-
-  // function pressedPrev(id: number) {
-  //   const actualSongId = appState.currentPlaying.id;
-  //   const actualIndex = result.findIndex((song) => song.id === actualSongId);
-
-  //   if (actualIndex === 0) {
-  //     const nextSong = { ...result[result.length - 1] };
-  //     nextSong.isPlaying = true;
-  //     return setAppState({ ...appState, currentPlaying: nextSong });
-  //   }
-  //   const nextSong = { ...result[actualIndex - 1] };
-  //   nextSong.isPlaying = true;
-
-  //   return setAppState({
-  //     ...appState,
-  //     currentPlaying: nextSong,
-  //   });
-  // }
-
-  // function pressedNext(id: number) {
-  //   const actualSongId = appState.currentPlaying.id;
-  //   const actualIndex = result.findIndex((song) => song.id === actualSongId);
-
-  //   const songsCopy = [...appState.songs];
-  //   songsCopy[actualIndex].isPlaying = false;
-
-  //   if (actualIndex === result.length - 1) {
-  //     const nextSong = { ...result[0] };
-  //     nextSong.isPlaying = true;
-  //     songsCopy[0].isPlaying = true;
-  //     return setAppState({
-  //       ...appState,
-  //       songs: songsCopy,
-  //       currentPlaying: nextSong,
-  //     });
-  //   }
-  //   const nextSong = { ...result[actualIndex + 1] };
-  //   nextSong.isPlaying = true;
-  //   songsCopy[actualIndex + 1].isPlaying = true;
-  //   return setAppState({
-  //     ...appState,
-  //     songs: songsCopy,
-  //     currentPlaying: nextSong,
-  //   });
-  // }
-
-  // function onChangePlay(id: number, playing: boolean) {
-  //   let auxSongs: Song[] = [...appState.songs];
-  //   auxSongs = auxSongs.map((song) => ({ ...song, isPlaying: false }));
-  //   const songIdx: number = auxSongs.findIndex((song) => song.id === id);
-  //   auxSongs[songIdx].isPlaying = playing;
-  //   setAppState({
-  //     ...appState,
-  //     songs: auxSongs,
-  //     currentPlaying: auxSongs[songIdx],
-  //   });
-  // }
 
   if (result.loading) {
     return <h2>Cargando..</h2>;
@@ -126,17 +64,7 @@ function HomeView(): JSX.Element {
         handleChange={onFilterQuery}
       />
       <FeaturedSongs allSongs={filteredSongs} />
-      {/* <MusicPlayer
-        allSongs={vanillaSongs}
-        likedSongs={likedSongs}
-        handleLiked={(id, liked) => onChangeLiked(id, liked)}
-        handlePlay={(id, playing) => onChangePlay(id, playing)}
-        handlePrev={(id) => pressedPrev(id)}
-        handleNext={(id) => pressedNext(id)}
-        currentSong={currentPlaying}
-        currentTime={}
-        isPlaying={}
-      /> */}
+      <MusicPlayer playlist={vanillaSongs} />
     </Container>
   );
 }

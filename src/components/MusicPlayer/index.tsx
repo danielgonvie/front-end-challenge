@@ -1,5 +1,13 @@
 import { Text } from '$/components/Text';
-import React, { useEffect } from 'react';
+import { AppContext } from '$/context/AppContext';
+import {
+  checkLiked,
+  handleNext,
+  handlePrev,
+  likeHasChange,
+  playHasChange,
+} from '$/utils/helpers/commonHelper';
+import React, { useContext } from 'react';
 
 import {
   AudioPlayer,
@@ -17,40 +25,12 @@ import {
 import { Props, Song } from './types';
 
 export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
-  (
-    {
-      className,
-      currentSong,
-      currentTime,
-      likedSongs,
-      isPlaying,
-      handleLiked,
-      handlePlay,
-      handlePrev,
-      handleNext,
-      ...props
-    },
-    ref,
-  ) => {
-    const [song, setSong] = React.useState<Song>(currentSong);
-    const [playing, setPlaying] = React.useState(isPlaying);
+  ({ className, playlist, ...props }, ref) => {
+    const { currentPlaying, setCurrentPlaying } = useContext(AppContext);
+    const { isPlaying, setIsPlaying } = useContext(AppContext);
+    const { likedSongs, setLikedSongs } = useContext(AppContext);
 
-    function likeHasChange(liked: boolean) {
-      handleLiked(currentSong.id, liked);
-    }
-
-    function playHasChange(isPlaying: boolean) {
-      setPlaying(isPlaying);
-      handlePlay(song.id, isPlaying);
-    }
-
-    useEffect(() => {
-      const songCopy = { ...currentSong };
-      songCopy.liked = likedSongs.some((id) => id === songCopy.id);
-      setSong(songCopy);
-    }, [currentSong, likedSongs]);
-
-    if (!song.hasOwnProperty('author')) {
+    if (!currentPlaying.hasOwnProperty('author')) {
       return (
         <Container>
           <Text tag="h3" variant="bodyBold">
@@ -64,34 +44,38 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
       <Container>
         <ContainerFlex>
           <LikeButton
-            isLiked={song.liked}
-            pressedLike={(e) => likeHasChange(e)}
+            isLiked={checkLiked(currentPlaying)}
+            pressedLike={(e) =>
+              likeHasChange(e, likedSongs, setLikedSongs, currentPlaying.id)
+            }
           />
           <Thumbnail>
-            <ThumbnailCover src={song.image} alt="Song cover image" />
+            <ThumbnailCover src={currentPlaying.image} alt="Song cover image" />
           </Thumbnail>
           <SongInfo>
             <Text tag="h3" variant="bodyBold">
-              {song.name}
+              {currentPlaying.name}
             </Text>
             <Text tag="p" variant="body">
-              {song.author.name}
+              {currentPlaying.author.name}
             </Text>
           </SongInfo>
         </ContainerFlex>
         <ContainerControl>
-          <PrevButton pressedPrev={() => handlePrev(song.id)} />
-          <PlayerIcon
-            isPlaying={song.isPlaying}
-            pressedPlay={(e) => playHasChange(e)}
+          <PrevButton
+            pressedPrev={() =>
+              handlePrev(currentPlaying.id, playlist, setCurrentPlaying)
+            }
           />
-          <NextButton pressedNext={() => handleNext(song.id)} />
+          <PlayerIcon
+            isPlaying={isPlaying}
+            pressedPlay={(e) =>
+              playHasChange(e, currentPlaying, setIsPlaying, setCurrentPlaying)
+            }
+          />
+          <NextButton pressedNext={() => handleNext(currentPlaying.id, playlist, setCurrentPlaying)} />
         </ContainerControl>
-        <AudioPlayer
-          currentTime={currentTime}
-          currentSong={song}
-          isPlaying={playing}
-        />
+        <AudioPlayer />
       </Container>
     );
   },

@@ -40,3 +40,63 @@ export const getAudioDuration = (audio: HTMLAudioElement) => {
 
   return result;
 };
+
+export const likeHasChange = (
+  liked: boolean,
+  likedSongs: number[],
+  setter: (arg: number[]) => void,
+  songId: number,
+) => {
+  const likedSongsArr: number[] = [...likedSongs];
+  liked
+    ? likedSongsArr.splice(likedSongsArr.indexOf(songId), 1)
+    : likedSongsArr.push(songId);
+  localStorage.setItem('likedSongs', JSON.stringify(likedSongsArr));
+  setter(likedSongsArr);
+};
+
+export const playHasChange = (
+  playing: boolean,
+  currentSong: Song,
+  setterPlaying: (arg: boolean) => void,
+  setterCurrentSong: (arg: Song) => void,
+) => {
+  setterPlaying(playing);
+  setterCurrentSong(currentSong);
+};
+
+export const handlePrev = (
+  currentPlayingId: number,
+  playlist: Song[],
+  setterCurrentSong: (arg: Song) => void,
+) => {
+  const currentSongIndex = playlist.findIndex(
+    (song) => song.id === currentPlayingId,
+  );
+
+  if (currentSongIndex === 0) {
+    const nextSong = { ...playlist[playlist.length - 1] };
+    return setterCurrentSong(nextSong);
+  }
+  const nextSong = { ...playlist[currentSongIndex - 1] };
+
+  return setterCurrentSong(nextSong);
+};
+
+export const handleNext = (
+  currentPlayingId: number,
+  playlist: Song[],
+  setterCurrentSong: (arg: Song) => void,
+) => {
+  const currentSongIndex = playlist.findIndex(
+    (song) => song.id === currentPlayingId,
+  );
+
+  if (currentSongIndex === playlist.length - 1) {
+    const nextSong = { ...playlist[0] };
+    return setterCurrentSong(nextSong);
+  }
+  const nextSong = { ...playlist[currentSongIndex + 1] };
+  return setterCurrentSong(nextSong);
+};
+

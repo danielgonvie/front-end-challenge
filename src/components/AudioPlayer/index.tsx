@@ -1,6 +1,7 @@
 import { SongCard } from '$/components/SongCard';
 import { Text } from '$/components/Text';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { AppContext } from '$/context/AppContext';
 
 import { Container, MainAudio, SongRange, Timer } from './styles';
 import { Props, Song } from './types';

@@ -3,7 +3,12 @@ import { LikeButton } from '$/components/LikeButton';
 import { PlayerIcon } from '$/components/PlayerIcon';
 import { Text } from '$/components/Text';
 import { AppContext } from '$/context/AppContext';
-import { checkLiked, getAudioDuration } from '$/utils/helpers/commonHelper';
+import {
+  checkLiked,
+  getAudioDuration,
+  likeHasChange,
+  playHasChange,
+} from '$/utils/helpers/commonHelper';
 import React, { useContext, useEffect } from 'react';
 
 import {
@@ -37,20 +42,6 @@ export const SongCard = React.forwardRef<HTMLDivElement, Props>(
       false,
     );
 
-    function likeHasChange(liked: boolean) {
-      const likedSongsArr: number[] = [...likedSongs];
-      liked
-        ? likedSongsArr.splice(likedSongsArr.indexOf(song.id), 1)
-        : likedSongsArr.push(song.id);
-      localStorage.setItem('likedSongs', JSON.stringify(likedSongsArr));
-      setLikedSongs(likedSongsArr);
-    }
-
-    function playHasChange(playing: boolean) {
-      setIsPlaying(playing);
-      setCurrentPlaying(song);
-    }
-
     return (
       <Container className={className}>
         <Thumbnail>
@@ -76,7 +67,9 @@ export const SongCard = React.forwardRef<HTMLDivElement, Props>(
           <BottomDiv>
             <PlayerIcon
               isPlaying={isPlaying && currentPlaying.id === song.id}
-              pressedPlay={(e) => playHasChange(e)}
+              pressedPlay={(e) =>
+                playHasChange(e, song, setIsPlaying, setCurrentPlaying)
+              }
             />
             <TextDuration tag="p" variant="caption">
               {songTime}
@@ -86,7 +79,9 @@ export const SongCard = React.forwardRef<HTMLDivElement, Props>(
         </SongBody>
         <LikeButton
           isLiked={checkLiked(song)}
-          pressedLike={(e) => likeHasChange(e)}
+          pressedLike={(e) =>
+            likeHasChange(e, likedSongs, setLikedSongs, song.id)
+          }
         />
       </Container>
     );
