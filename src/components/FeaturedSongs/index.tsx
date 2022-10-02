@@ -11,7 +11,11 @@ export const FeaturedSongs = React.forwardRef<HTMLDivElement, Props>(
     const { filteredSongs } = useContext(AppContext);
 
     if (filteredSongs.length === 0) {
-      return <h2>No hay canciones disponibles.</h2>;
+      return (
+        <Text tag="h2" variant="title2">
+          No hay canciones disponibles.
+        </Text>
+      );
     }
 
     return (
