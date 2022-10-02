@@ -8,15 +8,9 @@ interface Song {
   genre: string;
   audio: { url: string };
   author: { name: string };
-  liked: boolean;
-  isPlaying: boolean;
 }
 
 export type Props = HTMLAttributes<HTMLDivElement> & {
   className?: string;
   songData: Song;
-  isPlaying: boolean;
-  likedSongs: number[];
-  onChangeLiked: (a: number, b: boolean) => void;
-  onChangePlay: (a: number, b: boolean) => void;
 };
