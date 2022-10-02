@@ -1,13 +1,15 @@
-import React from 'react';
+import { AppContext } from '$/context/AppContext';
+import React, { useContext } from 'react';
 
 import { Component, Container } from './styles';
 import { Props } from './types';
 
 export const Dropdown = React.forwardRef<HTMLSelectElement, Props>(
-  ({ className, name, onChangeSort, ...props }, ref) => {
+  ({ className, name, ...props }, ref) => {
+    const { setSortedBy } = useContext(AppContext);
+
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const value = event.target.value;
-      onChangeSort(value);
+      setSortedBy(event.target.value);
     };
 
     return (

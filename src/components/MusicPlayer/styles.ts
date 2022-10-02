@@ -18,7 +18,7 @@ export const Container = styled.div`
   padding: 1rem 1.5rem;
   border-radius: 1rem 1rem 0 0;
   color: ${({ theme }) => theme.color.white};
-  box-shadow: 0px -1px 3px ${({ theme }) => theme.color.grayscale900};
+  box-shadow: 0rem -0.0625rem 0.1875rem ${({ theme }) => theme.color.grayscale900};
 `;
 
 export const Thumbnail = styled.div`
@@ -63,7 +63,7 @@ export const PrevButton = styled(PrevButtonDefault)`
   & span {
     color: white;
     &:hover{
-      filter: drop-shadow(0px 0px 1.5px white);
+      filter: drop-shadow(0px 0px 0.09375rem white);
     }
 
   }
@@ -73,7 +73,7 @@ export const NextButton = styled(NextButtonDefault)`
   & span {
     color: white;
     &:hover{
-      filter: drop-shadow(0px 0px 1.5px white);
+      filter: drop-shadow(0px 0px 0.09375rem white);
     }
   }
 `;

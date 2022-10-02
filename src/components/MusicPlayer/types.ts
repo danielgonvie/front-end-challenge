@@ -6,19 +6,9 @@ export type Song = {
   genre: string;
   audio: { url: string };
   author: { name: string };
-  liked: boolean;
-  isPlaying: boolean;
 };
 
 export type Props = {
-  allSongs: Song[];
+  playlist: Song[];
   className?: string;
-  currentSong: Song;
-  currentTime: number;
-  likedSongs: number[];
-  isPlaying: boolean;
-  handleLiked: (a: number, b: boolean) => void;
-  handlePlay: (a: number, b: boolean) => void;
-  handlePrev: (id: number) => void;
-  handleNext: (id: number) => void;
 };

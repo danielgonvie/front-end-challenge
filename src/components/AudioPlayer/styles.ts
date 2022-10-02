@@ -12,7 +12,7 @@ export const SongRange = styled.input`
   overflow: hidden;
   display: block;
   appearance: none;
-  max-width: 700px;
+  max-width: 16.7rem;
   width: 100%;
   margin: 0;
   height: 2rem;
@@ -50,7 +50,7 @@ export const SongRange = styled.input`
 
   &::-webkit-slider-runnable-track {
     width: 100%;
-    height: 5px;
+    height: 0,3125rem;
     cursor: pointer;
 
     border-radius: 0.1rem;

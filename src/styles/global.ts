@@ -8,13 +8,14 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    // Removed Jakarta, problems with windows spacing.
+    // Removed Jakarta, problems with windowsOS spacing.
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    user-select: none;
   }
   #__next {
     display: flex;
