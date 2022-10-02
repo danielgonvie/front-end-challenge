@@ -25,7 +25,7 @@ export const LikedButton = styled(Liked)`
   transform-origin: center;
 
   &:hover {
-    filter: drop-shadow(0 0 2px #bf508b);
+    filter: drop-shadow(0 0 0.125rem #bf508b);
   }
 `;
 
@@ -35,6 +35,8 @@ export const UnlikedButton = styled(Unliked)`
 
   &:hover {
     fill: ${({ theme }) => theme.color.geraldine900};
-    filter: drop-shadow(0 0 1px ${({ theme }) => theme.color.geraldine900});
+    filter: drop-shadow(
+      0 0 0.0625rem ${({ theme }) => theme.color.geraldine900}
+    );
   }
 `;

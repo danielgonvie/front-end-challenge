@@ -7,7 +7,7 @@ import { Container, Dropdown, FlexContainer } from './styles';
 import { Props } from './types';
 
 export const FeaturedSongs = React.forwardRef<HTMLDivElement, Props>(
-  ({ className, allSongs, ...props }, ref) => {
+  ({ className }, ref) => {
     const { filteredSongs } = useContext(AppContext);
 
     if (filteredSongs.length === 0) {

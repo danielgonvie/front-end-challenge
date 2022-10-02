@@ -25,7 +25,7 @@ export const Component = styled.input`
 
   background: ${({ theme }) => theme.color.white};
 
-  border: 1px solid ${({ theme }) => theme.color.grayscale300};
+  border: 0.0625rem solid ${({ theme }) => theme.color.grayscale300};
   border-radius: 0.5rem;
   outline-color: ${({ theme }) => theme.color.grayscale900};
   font-feature-settings: 'tnum' on, 'lnum' on;

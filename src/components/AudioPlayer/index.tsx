@@ -1,17 +1,15 @@
-import { SongCard } from '$/components/SongCard';
-import { Text } from '$/components/Text';
 import { AppContext } from '$/context/AppContext';
 import { parseTime, handleNext } from '$/utils/helpers/commonHelper';
 import React, { useContext, useEffect } from 'react';
 
 import { Container, MainAudio, SongRange, Timer } from './styles';
-import { Props, Song } from './types';
+import { Props } from './types';
 
 export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
   ({ className }, ref) => {
     const { currentPlaying, setCurrentPlaying } = useContext(AppContext);
     const { vanillaSongs } = useContext(AppContext);
-    const { isPlaying, setIsPlaying } = useContext(AppContext);
+    const { isPlaying } = useContext(AppContext);
     const { currentTime, setCurrentTime } = useContext(AppContext);
     const [songDuration, setSongDuration] = React.useState(0);
 

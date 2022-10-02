@@ -18,14 +18,14 @@ export const Component = styled.select`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 12px;
-    gap: 16px;
+    padding: 0.75rem;
+    gap: 1rem;
 
-    width: 232px;
-    height: 48px;
+    width: 14.5rem;
+    height: 3rem;
 
     ${({ theme }) => theme.color.white};
-    border-radius: 4px;
+    border-radius: 0.25rem;
   }
   &:focus {
     outline: none;

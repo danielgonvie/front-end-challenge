@@ -46,7 +46,7 @@ export const visuallyHidden = css`
 
   border: 0 !important;
 
-  clip: rect(1px, 1px, 1px, 1px) !important;
+  clip: rect(0.0625rem, 0.0625rem, 0.0625rem, 0.0625rem) !important;
   -webkit-clip-path: inset(50%) !important;
   clip-path: inset(50%) !important;
 `;
