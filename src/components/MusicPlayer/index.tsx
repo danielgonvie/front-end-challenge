@@ -23,7 +23,7 @@ import {
   Thumbnail,
   ThumbnailCover,
 } from './styles';
-import { Props, Song } from './types';
+import { Props } from './types';
 
 export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
   ({ className, playlist }, ref) => {

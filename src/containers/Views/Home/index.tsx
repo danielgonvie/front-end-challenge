@@ -26,7 +26,6 @@ function HomeView(): JSX.Element {
 
   useEffect(() => {
     if (!result.loading && !result.error) {
-      console.log(result);
       let songsRecieved: Song[] = [...result] as Song[];
       songsRecieved = songsRecieved.map((song) => ({
         ...song,
