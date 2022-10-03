@@ -1,3 +1,4 @@
+import { LoadingState } from '$/components/LoadingState';
 import { Text } from '$/components/Text';
 import { AppContext } from '$/context/AppContext';
 import {
@@ -8,7 +9,6 @@ import {
   playHasChange,
 } from '$/utils/helpers/commonHelper';
 import React, { useContext } from 'react';
-import { LoadingState } from '../LoadingState';
 
 import {
   AudioPlayer,
@@ -72,7 +72,11 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
               playHasChange(e, currentPlaying, setIsPlaying, setCurrentPlaying)
             }
           />
-          <NextButton pressedNext={() => handleNext(currentPlaying.id, playlist, setCurrentPlaying)} />
+          <NextButton
+            pressedNext={() =>
+              handleNext(currentPlaying.id, playlist, setCurrentPlaying)
+            }
+          />
         </ContainerControl>
         <AudioPlayer />
       </Container>

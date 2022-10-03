@@ -1,4 +1,5 @@
 import { Song } from '$/context/types';
+/* eslint-disable */
 
 export const checkLiked = (song: Song) => {
   const likedSongs: number[] | null = JSON.parse(
@@ -103,4 +104,3 @@ export const handleNext = (
   const nextSong = { ...playlist[currentSongIndex + 1] };
   return setterCurrentSong(nextSong);
 };
-

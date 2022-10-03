@@ -19,7 +19,7 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     const { currentTime, setCurrentTime } = useContext(AppContext);
     const { volumeIsOn, setVolumeIsOn } = useContext(AppContext);
     const [songDuration, setSongDuration] = React.useState(0);
-    const audioPlayer = useRef(null);
+    const audioPlayer = useRef<HTMLAudioElement>(null);
 
     function startTimer(audio: HTMLAudioElement) {
       setInterval(() => {
@@ -28,57 +28,69 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     }
 
     function updateTime(e: React.ChangeEvent<HTMLInputElement>) {
-      audioPlayer.current.currentTime = +e.target.value;
-      setCurrentTime(+e.target.value);
+      if (audioPlayer && audioPlayer.current) {
+        audioPlayer.current.currentTime = +e.target.value;
+        setCurrentTime(+e.target.value);
+      }
     }
 
     useEffect(() => {
-      audioPlayer.current.src = currentPlaying.audio.url;
-      audioPlayer.current.addEventListener(
-        'loadedmetadata',
-        () => {
-          setSongDuration(audioPlayer.current.duration);
-        },
-        { once: true },
-      );
+      if (audioPlayer && audioPlayer.current) {
+        audioPlayer.current.src = currentPlaying.audio.url;
+        audioPlayer.current.addEventListener(
+          'loadedmetadata',
+          () => {
+            if (isPlaying && audioPlayer && audioPlayer.current) {
+              setSongDuration(audioPlayer.current.duration);
+            }
+          },
+          { once: true },
+        );
 
-      if (isPlaying) {
-        audioPlayer.current
-          .play()
-          .then(() => console.log())
-          .catch((error) => console.log(error, 'error del play'));
-      } else {
-        audioPlayer.current.pause();
+        if (isPlaying) {
+          audioPlayer.current
+            .play()
+            .then(() => console.log())
+            .catch((error) => console.log(error, 'error del play'));
+        } else {
+          audioPlayer.current.pause();
+        }
       }
     }, [currentPlaying]);
 
     useEffect(() => {
-      if (isPlaying) {
+      if (isPlaying && audioPlayer && audioPlayer.current) {
         audioPlayer.current
           .play()
           .then(() => console.log())
           .catch((error) => console.log(error, 'error del play'));
-      } else {
+      } else if (audioPlayer && audioPlayer.current) {
         audioPlayer.current.pause();
       }
     }, [isPlaying]);
 
     useEffect(() => {
-      currentTime >= audioPlayer.current.duration
-        ? handleNext(currentPlaying.id, vanillaSongs, setCurrentPlaying)
-        : '';
+      if (isPlaying && audioPlayer && audioPlayer.current) {
+        if (currentTime >= audioPlayer.current.duration) {
+          handleNext(currentPlaying.id, vanillaSongs, setCurrentPlaying);
+        }
+      }
     }, [currentTime]);
 
     useEffect(() => {
-      startTimer(audioPlayer.current);
+      if (audioPlayer && audioPlayer.current) {
+        startTimer(audioPlayer.current);
+      }
     }, []);
 
     useEffect(() => {
-      audioPlayer.current.muted = volumeIsOn;
+      if (audioPlayer && audioPlayer.current) {
+        audioPlayer.current.muted = volumeIsOn;
+      }
     }, [volumeIsOn]);
 
     return (
-      <Container className={className} ref={ref} >
+      <Container className={className} ref={ref}>
         <MainAudio
           ref={audioPlayer}
           id="main-audio"

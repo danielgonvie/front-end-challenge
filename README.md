@@ -27,8 +27,15 @@ Hablemos de los **extras**:
  -**Añadir microinteracciones y animaciones️**: Sinceramente he hecho lo que considero mínimo para que el usuario se sienta acompañado.
  -**Cuidado con la accesibilidad:** Por desgracia es un tema que he dejado para el final y hay completa carencia de accesibilidad. Vendrá en el parche 2.0 🙇🏻
  - **Coherencia semántica de etiquetas:** He estado pendiente de este tema, muy posiblemente mejorable, pero en ningún momento cayó en el olvido.
- 
+
 ### Apuntes:
+
+No he separado la parte lógica de la visual. Soy consciente de ello y sería algo a arreglar inmediatamente de seguir con el proyecto.
+
+He añadido la función de ordenar y filtrado. Ambas funcionan simultáneamente.
+
+He añadido la función de poder silenciar completamente la música cuando lo necesites.
+
 He intentado en todo momento conservar la estructura de la aplicación base.
 
 Funciones y variables autodescriptivas, cabe lugar a mejora, pero me he esforzado por que se entienda.

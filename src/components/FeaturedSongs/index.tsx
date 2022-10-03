@@ -27,10 +27,9 @@ export const FeaturedSongs = React.forwardRef<HTMLDivElement, Props>(
           <Dropdown />
         </FlexContainer>
         {filteredSongs.map((song) => {
-                    console.log(song, "venga guapo");
-          return (
-          <SongCard key={song.id} songData={song} />
-        )})}
+          console.log(song, 'venga guapo');
+          return <SongCard key={song.id} songData={song} />;
+        })}
       </Container>
     );
   },

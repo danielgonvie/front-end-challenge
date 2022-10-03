@@ -1,8 +1,8 @@
 import { AudioPlayer as AudioPlayerDefault } from '$/components/AudioPlayer';
+import { LikeButton as LikeButtonDefault } from '$/components/LikeButton';
 import { NextButton as NextButtonDefault } from '$/components/NextButton';
 import { PlayerIcon as PlayerIconDefault } from '$/components/PlayerIcon';
 import { PrevButton as PrevButtonDefault } from '$/components/PrevButton';
-import { LikeButton as LikeButtonDefault } from '$/components/LikeButton';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -62,25 +62,22 @@ export const PlayerIcon = styled(PlayerIconDefault)`
 export const PrevButton = styled(PrevButtonDefault)`
   & span {
     color: white;
-    &:hover{
+    &:hover {
       filter: drop-shadow(0px 0px 0.09375rem white);
     }
-
   }
 `;
 
 export const NextButton = styled(NextButtonDefault)`
   & span {
     color: white;
-    &:hover{
+    &:hover {
       filter: drop-shadow(0px 0px 0.09375rem white);
     }
   }
 `;
 
-export const AudioPlayer = styled(AudioPlayerDefault)`
-
-`;
+export const AudioPlayer = styled(AudioPlayerDefault)``;
 
 export const ContainerFlex = styled.div`
   display: flex;

@@ -1,3 +1,4 @@
+import { ErrorState } from '$/components/ErrorState';
 import { LoadingState } from '$/components/LoadingState';
 import { Text } from '$/components/Text';
 import { AppContext } from '$/context/AppContext';
@@ -6,7 +7,6 @@ import { useGetSongs } from '$/services/SongService';
 import { filterAndSort } from '$/utils/helpers/commonHelper';
 import { ApolloError } from '@apollo/client';
 import React, { useContext, useEffect } from 'react';
-import { ErrorState } from '../../../components/ErrorState';
 
 import { Container, FeaturedSongs, MusicPlayer, SearchInput } from './styles';
 
@@ -26,16 +26,18 @@ function HomeView(): JSX.Element {
 
   useEffect(() => {
     if (!result.loading && !result.error) {
-      console.log(result)
+      console.log(result);
       let songsRecieved: Song[] = [...result] as Song[];
       songsRecieved = songsRecieved.map((song) => ({
         ...song,
       }));
       setVanillaSongs(songsRecieved);
       setFilteredSongs(songsRecieved);
-      JSON.parse(localStorage.getItem('likedSongs')) !== null
-        ? setLikedSongs(JSON.parse(localStorage.getItem('likedSongs')))
-        : '';
+      if (JSON.parse(localStorage.getItem('likedSongs')) !== null) {
+        setLikedSongs(
+          JSON.parse(localStorage.getItem('likedSongs')) as number[],
+        );
+      }
       setCurrentPlaying(songsRecieved[0]);
     }
   }, [result, setVanillaSongs, setFilteredSongs, setLikedSongs]);
@@ -53,7 +55,9 @@ function HomeView(): JSX.Element {
     return <LoadingState />;
   }
   if (result.error) {
-    return <ErrorState errorMessage='Ups! Media Player not available. Try again later!' />;
+    return (
+      <ErrorState errorMessage="Ups! Media Player not available. Try again later!" />
+    );
   }
 
   return (
