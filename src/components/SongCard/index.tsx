@@ -43,7 +43,7 @@ export const SongCard = React.forwardRef<HTMLDivElement, Props>(
     );
 
     return (
-      <Container className={className}>
+      <Container className={className} ref={ref}>
         <Thumbnail>
           <ThumbnailCover src={song.image} alt="Song cover image" />
           {isPlaying && currentPlaying.id === song.id ? (

@@ -19,7 +19,7 @@ export const FeaturedSongs = React.forwardRef<HTMLDivElement, Props>(
     }
 
     return (
-      <Container>
+      <Container className={className} ref={ref}>
         <FlexContainer>
           <Text tag="h2" variant="title2">
             Featured songs

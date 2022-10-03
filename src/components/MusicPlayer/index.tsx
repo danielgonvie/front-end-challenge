@@ -26,7 +26,7 @@ import {
 import { Props, Song } from './types';
 
 export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
-  ({ className, playlist, ...props }, ref) => {
+  ({ className, playlist }, ref) => {
     const { currentPlaying, setCurrentPlaying } = useContext(AppContext);
     const { isPlaying, setIsPlaying } = useContext(AppContext);
     const { likedSongs, setLikedSongs } = useContext(AppContext);
@@ -40,7 +40,7 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
     }
 
     return (
-      <Container>
+      <Container className={className} ref={ref}>
         <ContainerFlex>
           <LikeButton
             isLiked={checkLiked(currentPlaying)}

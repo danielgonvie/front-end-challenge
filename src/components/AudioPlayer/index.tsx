@@ -78,7 +78,7 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
     }, [volumeIsOn]);
 
     return (
-      <Container>
+      <Container className={className} ref={ref} >
         <MainAudio
           ref={audioPlayer}
           id="main-audio"

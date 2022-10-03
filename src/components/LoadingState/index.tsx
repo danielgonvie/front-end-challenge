@@ -4,8 +4,8 @@ import { Container, StyledSpinner } from './styles';
 import { Props } from './types';
 
 export const LoadingState = React.forwardRef<HTMLDivElement, Props>(
-  ({ className, ...props }, ref) => (
-    <Container className={className}>
+  ({ className }, ref) => (
+    <Container className={className} ref={ref}>
       <StyledSpinner viewBox="0 0 50 50">
         <circle
           className="path"
