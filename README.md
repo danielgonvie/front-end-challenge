@@ -2,7 +2,7 @@
 
 ## Music Media player
 
-  (/src/assets/preview.png)
+  ![app preview](/src/assets/preview.png)
   
   ### Arrancar el proyecto:
   Clona el respositorio y accede a él con tu terminal de comandos favorita. En la raíz del proyecto:
