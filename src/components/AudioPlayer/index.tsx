@@ -40,7 +40,9 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
         audioPlayer.current.addEventListener(
           'loadedmetadata',
           () => {
-            setSongDuration(audioPlayer.current.duration);
+            if (audioPlayer.current) {
+              setSongDuration(audioPlayer.current.duration);
+            }
           },
           { once: true },
         );

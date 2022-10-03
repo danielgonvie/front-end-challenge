@@ -13,9 +13,9 @@ import { Container, FeaturedSongs, MusicPlayer, SearchInput } from './styles';
 function HomeView(): JSX.Element {
   const { vanillaSongs, setVanillaSongs } = useContext(AppContext);
   const { filteredSongs, setFilteredSongs } = useContext(AppContext);
-  const { likedSongs, setLikedSongs } = useContext(AppContext);
-  const { currentPlaying, setCurrentPlaying } = useContext(AppContext);
-  const { sortedBy, setSortedBy } = useContext(AppContext);
+  const { setLikedSongs } = useContext(AppContext);
+  const { setCurrentPlaying } = useContext(AppContext);
+  const { sortedBy } = useContext(AppContext);
   const { searchQuery, setSearchQuery } = useContext(AppContext);
 
   const result:
@@ -25,7 +25,7 @@ function HomeView(): JSX.Element {
     | undefined = useGetSongs();
 
   useEffect(() => {
-    if (!result.loading && !result.error) {
+    if (result && !result.loading && !result.error) {
       let songsRecieved: Song[] = [...result] as Song[];
       songsRecieved = songsRecieved.map((song) => ({
         ...song,

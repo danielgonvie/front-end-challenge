@@ -52,10 +52,10 @@ export const MusicPlayer = React.forwardRef<HTMLDivElement, Props>(
             <ThumbnailCover src={currentPlaying.image} alt="Song cover image" />
           </Thumbnail>
           <SongInfo>
-            <Text tag="h3" variant="bodyBold">
+            <Text color="white" tag="h3" variant="bodyBold">
               {currentPlaying.name}
             </Text>
-            <Text tag="p" variant="body">
+            <Text color="white" tag="p" variant="body">
               {currentPlaying.author.name}
             </Text>
           </SongInfo>
