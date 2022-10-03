@@ -11,14 +11,13 @@ export const PlayerIcon = React.forwardRef<HTMLButtonElement, Props>(
       return pressedPlay(!playing);
     }
 
-    // useEffect(() => pressedPlay(playing), [playing]);
     useEffect(() => setPlaying(isPlaying), [isPlaying]);
     return (
-      <Container className={className} ref={ref} onClick={playChanged}>
+      <Container className={className} onClick={playChanged}>
         {isPlaying ? (
-          <PlayState className="material-icons">&#xe034;</PlayState>
+          <PlayState ref={ref} className="material-icons">&#xe034;</PlayState>
         ) : (
-          <PlayState className="material-icons">&#xe037;</PlayState>
+          <PlayState ref={ref} className="material-icons">&#xe037;</PlayState>
         )}
       </Container>
     );
