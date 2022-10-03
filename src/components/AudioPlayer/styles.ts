@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   width: 35%;
 `;
 
@@ -21,7 +22,6 @@ export const SongRange = styled.input`
   overflow: hidden;
   display: block;
   appearance: none;
-  max-width: 16.7rem;
   width: 100%;
   margin: 0;
   height: 2rem;
@@ -59,7 +59,7 @@ export const SongRange = styled.input`
 
   &::-webkit-slider-runnable-track {
     width: 100%;
-    height: 0, 3125rem;
+    height: 0.3125rem;
     cursor: pointer;
 
     border-radius: 0.1rem;

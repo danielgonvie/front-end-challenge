@@ -1,129 +1,81 @@
-# Z1 Front-end Challenge
+# Z1 Front-end Challenge por Daniel González
 
-![](https://github.com/z1digitalstudio/front-end-challenge/blob/main/public/cover.jpg?raw=true)
+## Music Media player
 
-Here in Z1 we love music! We want to share of fav tunes with you, but for that **we need your help to finish our music application**.
+  (/src/assets/preview.png)
+  
+  ### Arrancar el proyecto:
+  Clona el respositorio y accede a él con tu terminal de comandos favorita. En la raíz del proyecto:
+  - Instala las dependencias del proyecto: `yarn install`
+  - Arranca el proyecto: `yarn run dev`
+  
+### Objetivos:
 
-We want you to experiment as much as possible the way we work. In your day-to-day work at Z1, there'll be occasions when you will need to jump in the middle of a project to implement a new feature.
+El **desafío principal** de esta práctica era realizar un reproductor funcional de música capaz de:
+  - Ver la lista de canciones. ✔️
+  - Poder escuchar cualquier canción seleccionada. ✔️
+  - Función de Play/Pause. ✔️
+  - Poder desplazarte entre el tiempo de la pista. ✔️
+  - Marcar las canciones como favorito y que permanezcan marcadas una vez refresques. ✔️
+  - Moverte entre canciones con los botones de "Atrás" y "Adelante". ✔️
+  
+Hablemos de los **extras**:
+ 
+ - **La app debería verse bien en cualquier tamaño de ventana, ser "responsive"️:**
+ Técnicamente se ve bastante bien en casi todos los tipos de ventana, excepto si pasamos a ventanas muy enanas o vista móvil ya directamente.
+ - **Añadir tests unitarios o de integración:** Por falta de tiempo, y en parte inexperiencia, no me ha sido posible añadir tests.
+ -**Añadir microinteracciones y animaciones️**: Sinceramente he hecho lo que considero mínimo para que el usuario se sienta acompañado.
+ -**Cuidado con la accesibilidad:** Por desgracia es un tema que he dejado para el final y hay completa carencia de accesibilidad. Vendrá en el parche 2.0 🙇🏻
+ - **Coherencia semántica de etiquetas:** He estado pendiente de este tema, muy posiblemente mejorable, pero en ningún momento cayó en el olvido.
+ 
+### Apuntes:
+He intentado en todo momento conservar la estructura de la aplicación base.
 
-In situations like those it's important you **take your time for gaining context**, understanding how the project works and what needs to be accomplished **before rushing to start writing code**.
+Funciones y variables autodescriptivas, cabe lugar a mejora, pero me he esforzado por que se entienda.
 
-So for this technical challenge, you'll be doing exactly that! You're responsible for adding **two brand new features to our music application**.
+He hecho sólo un story para el SongCard y he eliminado los archivos de stories vacíos por eso los componentes no tienen archivo *stories.tsx*.
 
-* [The Challenge](#The-Challenge)
-* [Design resources](#Design-resources)
-* [API](#API)
-* [Requisites](#Requisites)
-* [Stack and tech considerations](#Stack-and-tech-considerations)
-* [Evaluation criteria](#Evaluation-criteria)
-* [About Z1](#About-Z1)
-* [Contact](#Contact)
+He trabajado como lo haría en un entorno de trabajo, creando un nueva rama de git por feature o tarea.
 
-**To start**:
+He tenido que borrar la tipografía que venía por defecto ya que en mi sistema salían espacios que descolocaban absolutamente todos los textos y es incorregible con css.
 
-Star by **forking this project**. Remember to read the requisites carefully before starting writing code. Take a look at at `package.json` scripts to learn how to launch the project.
+Este apunte se borrará en cuanto se complete: Estoy intentando desplegar la aplicación en Vercel, pero tengo errores de typescript a la hora del despliegue. *Work in progress*🛠️
+ 
+ ---
+## El Viaje ⛰️
+Vamos con un poco de contexto ya que considero que es importante porque si echas un ojo a los commits, verás que esto ha sido una auténtica montaña rusa de emociones. 🎢
 
-Remember to **replace this README** with another one containing anything a person needs to know about how to launch the project as well as any relevant information about your thought process and the decisions you made to get to a solution.
+### Salida! 🏁
+Partimos de un **perfil completamente inexperto** en el stack tecnológico, hace 2 semanas no había tocado nunca jamás ni Typescript, ni Graphql, ni NextJS, ni tampoco Styled components. Esto promete.
 
-## The Challenge
+No lo voy a negar, recuerdas en el readme original que pone: **"Don't feel overwhelmed and make your best shot!"** ?
 
-What you need to do is:
+Adivina quien se sintió completamente overwhelmed en el minuto 1 🙂 pero aún así estaba dispuesto a darlo todo.
 
-### Feature #1: Display the song list 🎶
+El inicio fue muy caótico, después de haberme visto la docu de todo el stack y verme unos cuantos vídeos, comencé a replicar lo que ya había hecho, a base de ensayo y error me quedó mucho más claro cómo funcionaban los tipos de Typescript así como crear los Styled Components. También añadí la llamada con graphql/apolo y aparentemente las cosas iban avanzando. La verdad es que este proceso es uno de mis favoritos, no saber absolutamente nada y ver "Hello world" en pantalla es muy satisfactorio.
 
-- You will need to **fetch the songs and display them** accordingly to the design
-- Also, we need the user to be able to **save its fav tunes**. Unfortunately, **our endpoint does not provide a method** to do so. So we need to **find an alternative** method to persist user’s faves.
+### A medio camino 💪
+Fui cogiendo ritmo creando componentes, la estructura core de mi app estaba quedando bastante mal, pero ante el desconocimiento decidí dejarlo así de momento y arreglarlo luego, ya que quería tener como la aplicación entera más o menos funcionando. Ante la costumbre de usar a diario otro framework en el que las props se pasan de padre a hijo y de hijo a padre "manualmente", seguí la misma dinámica. Esto provocó que el botón "play" de la SongCard lanzase un evento a la propia songCard, esta a Featured Songs y esta finalmente a la app, es decir 3 funciones para un simple "play" teniendo que tiparlas y declarlas todas.😵
 
-### Feature #2: Let's the music play! 🔊
+Aquí también tuve mi primera **pelea intensa con Typescript**, decidí tratar de quitar errores que me devolvía por tipos que no entendía muy bien porqué eran. Perdí bastante tiempo pero a día de hoy ya lo entiendo mucho mejor y conseguí que aquel mural rojo pasase a ser simplemente alguien un poco sonrojado. 😊
 
-- By clicking on the play button on each card, the song needs to be load on the player and start playing
-- Player needs to be fully functional: user needs to be able to **play, pause and change the second of reproduction**
+### El principio del fin 🙃
+**Caos**. Todos esos apaños que había hecho para poder continuar estaban saliendo a flote. Imposible de controlar el monstruo que había creado. En este punto **sólo había usado useState y useEffect** y la aplicación era insostenible, esa comunicación de componente nieto a componente abuelo fallaba más que una escopeta de feria. Tampoco tanto, no dramaticemos. Pero no había manera de que funcionasen correctamente los controles de reproducción.
 
-## Design resources
-Our friends from the design team prepared **for how we want things to look like** and made a very fancy UI.
-- [Figma Design](https://www.figma.com/file/0cV6hohYTFHIvKqzHHRrtn/Front-End-Team-challenge) 
+Durante estos ultimos días estuve pensando como un bobo: "No sé si habrá algún tipo de contexto para no tener que estar haciendo esto que hago...", pero me costó mucho caer en nuestro querido amigo y vecino **useContext**🦸‍♂️.
 
-## API
-A **GraphQL endpoint** our backend friends created **for fetching our favorite songs**
-- `https://api-frontend-challenge.herokuapp.com/graphql`
+En ese momento vi la luz al final del túnel por un lado, por otro: había que **refactorizar absolutamente TODO**.
 
-## Requisites
+A 2 días de que me comprometí a entregar el proyecto, refactorizarlo todo...
 
-This is a more detailed list of all the requisites you should bear in mind for creating an incredible product. **Feel free to go as further as you feel comfortable** and show us what you can do!
+Diría que no fue fácil, pero la verdad le cogí el punto bastante rápido y finalmente lo conseguí, me dediqué a borrar código muerto y intentar llevar las funciones comunes al archivo del contexto para que estuviesen para uso y disfrute de todos los componentes.
 
-### Make things work! 👌
+### Deadline 🎉
 
-- User should be able to:
-  - see list of songs
-  - listen to any song they choose
-  - play and pause song
-  - control track
-  - mark a song as favorite
+Aquí estamos en el último día. La verdad, me hubiese gustado poder seguir y abarcar más pero es que han sido dos semanas muy intensas y mi cuerpo me pide entregarlo ya. Después de 8 horas de jornada laboral enfrentarte a esta prueba otras 4/6 horitas diarias agota.
 
-### Prepare for a challenge! 🚀
+Sinceramente me siento muy orgulloso de lo que he hecho y he conseguido en tan poco tiempo y con la completa inexperiencia que había. Pase lo que pase, me quedo con lo que he vivido estas dos semanas. Hacía tiempo que no me enfrentaba a un reto y mi cuerpo lo echaba de menos. Gracias.
 
-- User should be able to:
-  - move between songs with the prev/next buttons of the audio player
+---
 
-### Go for an extra mile! 🔥
-
-- App should look good in all window sizes
-- Add unit or integration tests
-- Add some micro interactions and animations
-- Be careful about accessibility
-- Be careful about your markup semantics
-
-## Stack and tech considerations
-
-![image](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![image](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![image](https://img.shields.io/badge/GraphQl-E10098?style=for-the-badge&logo=graphql&logoColor=white)
-![iamge](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
-
-- This project is written in **Next.js**
-- The project **includes Typescript**, because it's a usual part of our stack. If you haven't work with Typescript before, don’t let that discourage you! We understand that, as developers, part of our job is facing new things constantly and **we will have in consideration you may never worked with it**.
-- Likewise, **we usually work with GraphQL**. If you know your way around it, that's great! If not, you can still give it a try. We expect you're be able to set up a client to consume the GraphQL endpoint we've set for you. You can check `apollo` or `react-query` for that task, for example.
-- As **for styling**, feel free to **go with your favorite flavor**. Though we use `styled-components` is not mandatory you do so too. Please **do not relay on css-frameworks or components libraries** for this.
-- User should be able to use the app, so you'll need to **deploy your project**! You can choose any pretty straightforward method for this, like `Vercel`, `Github pages` or similar.
-- **You can add unit or integration tests** to the mix
-- You can **go with the structure we have set up**. But **feel free to modify the file directory**, add, delete or merge folders if you want and, in short, structure code to your liking.
-- Some **basic tooling has been set up** for you, but **feel free to adapt it** to your preference (for example by adding/removing ESLint rules) or adding new tools you think may be relevant to create the best DX experience.
-
-👉 Lastly, remember **this challenge is the same for all technical levels**, so it's possible you're not familiar with all tools and concepts mentioned, and not all requisites and technical criteria applies to you. **Don't feel overwhelmed and make your best shot!**
-
-## Evaluation criteria
-
-- Your **code does work** accordingly to the product specifications
-- Your **code does not throw any errors** or warnings in the console
-- You **understand the requirements** the features needs to meet and are able of implement them
-- Your **care about your markup structure** and you **write good css**. Css is important, people!
-- You **care for the design** our team provide **and make it look at its best**
-- In general, you **care for detail**. Coding is caring. We expect you care for **accessibility**, semantics and don't leave anything to chance.
-- Your code is **well-written and structured**. Also you understand the balance between **clever, reusable code** and easy to read, change and maintain code.
-- You're able to **make decisions** about your implementation, **understand the tradeoffs** involved and be able to **reason about them**. Code is a team game!
-- In the same line, your care about **documenting your decisions** and your approach to the problem if necessary.
-- You're able to **investigate about the right tools** for the job and learn to use them by **reading documentation**. We'll value you **use as less external libraries as possible**.
-- You are committed to **create a appealing and smooth experience** for the user, and you know a lot of things adds up for this to be accomplished: performance, cover for all application states (empty, error, loading states), micro-interactions...
-- You feel comfortable working with git, **commit frequently and clearly**. And your commits make sense as a unit. You make check **Conventional commits** for your commit messages. Your knowledge of the git and Github workflow is a plus!
-
-## About Z1
-
-Here at z1 we make our best to offer the ideal environment for you to developing both professionally and personally. That's why we offer:
-
-⏰ **Flexible working hours**
-
-Life is not rigid; why should your work schedule be? We firmly believe that develop a brilliant career is compatible with having time to enhance other aspects of our lives.
-
-🎓 **Learning and training plan**
-
-Technology continually evolves, and so do we. We are not afraid of change, and we know the only way to stay up to date is to invest time on research, and study new trends.
-
-🤙 **Good vibes only**
-
-Empathy is one of our core values. This means listening to each other, having fun together, and trying to make everybody's life enjoyable while working on exciting projects.
-
-## Contact
-
-Follow us! we are on [Linkedin](https://www.linkedin.com/company/z1digitalstudio), [Twitter](https://twitter.com/z1digitalstudio) and [Instagram](https://www.instagram.com/z1digitalstudio/).
-
-Also, we show our work on [Dribble]() (we are part of the same [Tiny](https://www.tinycapital.com/) family 😉) and we share our knowledge on [Medium](https://medium.com/z1digitalstudio)
+Agracedimientos especiales a mi pareja que se ha quedado sin novio 2 semanas 🧡
