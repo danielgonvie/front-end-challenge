@@ -85,7 +85,7 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
 
     useEffect(() => {
       if (audioPlayer && audioPlayer.current) {
-        audioPlayer.current.muted = volumeIsOn;
+        audioPlayer.current.muted = !volumeIsOn;
       }
     }, [volumeIsOn]);
 
@@ -110,14 +110,14 @@ export const AudioPlayer = React.forwardRef<HTMLDivElement, Props>(
             className="material-icons"
             onClick={() => setVolumeIsOn(false)}
           >
-            &#xe04f;
+            &#xe04d;
           </VolumeControl>
         ) : (
           <VolumeControl
             className="material-icons"
             onClick={() => setVolumeIsOn(true)}
           >
-            &#xe04d;
+            &#xe04f;
           </VolumeControl>
         )}
       </Container>

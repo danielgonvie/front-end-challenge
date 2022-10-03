@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 
-import { Data, Song } from './SongServiceTypes';
+import { Data, LoadingError, Song } from './SongServiceTypes';
 
 export const GET_SONGS = gql`
   query SongsQuery {
@@ -23,11 +23,12 @@ export const GET_SONGS = gql`
 `;
 
 export function useGetSongs() {
-  const { data, loading, error } = useQuery<Data>(GET_SONGS);
+  const { data, loading, error } = useQuery<Data, LoadingError>(GET_SONGS);
   if (loading) return { loading };
   if (error) return { error };
-  if (data) {
+  if (data && data.songs) {
     const songs: Song[] = data.songs.songs;
     return songs;
   }
+  return [] as Song[];
 }

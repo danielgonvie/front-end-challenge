@@ -32,7 +32,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [currentPlaying, setCurrentPlaying] = useState({} as Song);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [volumeIsOn, setVolumeIsOn] = useState(0);
+  const [volumeIsOn, setVolumeIsOn] = useState(true);
 
   return (
     <AppContext.Provider

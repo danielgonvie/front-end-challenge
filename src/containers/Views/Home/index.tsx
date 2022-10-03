@@ -25,19 +25,25 @@ function HomeView(): JSX.Element {
     | undefined = useGetSongs();
 
   useEffect(() => {
-    if (result && !result.loading && !result.error) {
-      let songsRecieved: Song[] = [...result] as Song[];
+    if (
+      result &&
+      !result.hasOwnProperty('loading') &&
+      !result.hasOwnProperty('error')
+    ) {
+      let songsRecieved: Song[] = result as Song[];
       songsRecieved = songsRecieved.map((song) => ({
         ...song,
       }));
       setVanillaSongs(songsRecieved);
       setFilteredSongs(songsRecieved);
-      if (JSON.parse(localStorage.getItem('likedSongs')) !== null) {
+      if (localStorage.getItem('likedSongs') !== null) {
         setLikedSongs(
-          JSON.parse(localStorage.getItem('likedSongs')) as number[],
+          JSON.parse(localStorage.getItem('likedSongs') || '') as number[],
         );
       }
-      setCurrentPlaying(songsRecieved[0]);
+      setCurrentPlaying(
+        songsRecieved[0] !== undefined ? songsRecieved[0] : ({} as Song),
+      );
     }
   }, [result, setVanillaSongs, setFilteredSongs, setLikedSongs]);
 
@@ -50,10 +56,10 @@ function HomeView(): JSX.Element {
     setSearchQuery(filter);
   }
 
-  if (result.loading) {
+  if (result && result.hasOwnProperty('loading')) {
     return <LoadingState />;
   }
-  if (result.error) {
+  if (result && result.hasOwnProperty('error')) {
     return (
       <ErrorState errorMessage="Ups! Media Player not available. Try again later!" />
     );

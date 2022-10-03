@@ -1,5 +1,4 @@
 import { Song } from '$/context/types';
-/* eslint-disable */
 
 export const checkLiked = (song: Song) => {
   const likedSongs: number[] | null = JSON.parse(
@@ -22,9 +21,16 @@ export const filterAndSort = (
     ),
   );
 
-  return sortedBy === 'author'
-    ? filteredArr.sort((a, b) => a.author.name.localeCompare(b.author.name))
-    : filteredArr.sort((a, b) => a[sortedBy].localeCompare(b[sortedBy]));
+  if (sortedBy === 'author') {
+    return filteredArr.sort((a, b) =>
+      a.author.name.localeCompare(b.author.name),
+    );
+  }
+  if (sortedBy === 'name') {
+    return filteredArr.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  return filteredArr.sort((a, b) => a.genre.localeCompare(b.genre));
 };
 
 export const parseTime = (time: number) => {
@@ -53,9 +59,11 @@ export const likeHasChange = (
   songId: number,
 ) => {
   const likedSongsArr: number[] = [...likedSongs];
-  liked
-    ? likedSongsArr.splice(likedSongsArr.indexOf(songId), 1)
-    : likedSongsArr.push(songId);
+  if (liked) {
+    likedSongsArr.splice(likedSongsArr.indexOf(songId), 1)
+  } else {
+    likedSongsArr.push(songId);
+  }
   localStorage.setItem('likedSongs', JSON.stringify(likedSongsArr));
   setter(likedSongsArr);
 };
@@ -81,11 +89,11 @@ export const handlePrev = (
 
   if (currentSongIndex === 0) {
     const nextSong = { ...playlist[playlist.length - 1] };
-    return setterCurrentSong(nextSong);
+    return setterCurrentSong(nextSong as Song);
   }
   const nextSong = { ...playlist[currentSongIndex - 1] };
 
-  return setterCurrentSong(nextSong);
+  return setterCurrentSong(nextSong as Song);
 };
 
 export const handleNext = (
@@ -99,8 +107,8 @@ export const handleNext = (
 
   if (currentSongIndex === playlist.length - 1) {
     const nextSong = { ...playlist[0] };
-    return setterCurrentSong(nextSong);
+    return setterCurrentSong(nextSong as Song);
   }
   const nextSong = { ...playlist[currentSongIndex + 1] };
-  return setterCurrentSong(nextSong);
+  return setterCurrentSong(nextSong as Song);
 };

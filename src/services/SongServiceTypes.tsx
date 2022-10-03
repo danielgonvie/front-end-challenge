@@ -1,3 +1,5 @@
+import { ApolloError } from '@apollo/client';
+
 export type Song = {
   id: number;
   name: string;
@@ -12,4 +14,9 @@ export type Data = {
   songs: {
     songs: [Song];
   };
+};
+
+export type LoadingError = {
+  loading?: true | undefined;
+  error?: ApolloError | undefined;
 };
