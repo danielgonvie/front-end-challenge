@@ -9,7 +9,7 @@ import {
   likeHasChange,
   playHasChange,
 } from '$/utils/helpers/commonHelper';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import {
   AnimatedIcon,
