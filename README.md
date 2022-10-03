@@ -4,6 +4,8 @@
 
   ![app preview](/src/assets/preview.png)
   
+  <h4 align="center"><a href="https://front-end-challenge-l0p6t4law-danielgonvie.vercel.app/">Demo publicada en Vercel</a> </h4>
+  
   ### Arrancar el proyecto:
   Clona el respositorio y accede a él con tu terminal de comandos favorita. En la raíz del proyecto:
   - Instala las dependencias del proyecto: `yarn install`
@@ -45,8 +47,6 @@ He hecho sólo un story para el SongCard y he eliminado los archivos de stories 
 He trabajado como lo haría en un entorno de trabajo, creando un nueva rama de git por feature o tarea.
 
 He tenido que borrar la tipografía que venía por defecto ya que en mi sistema salían espacios que descolocaban absolutamente todos los textos y es incorregible con css.
-
-Este apunte se borrará en cuanto se complete: Estoy intentando desplegar la aplicación en Vercel, pero tengo errores de typescript a la hora del despliegue. *Work in progress*🛠️
  
  ---
 ## El Viaje ⛰️
