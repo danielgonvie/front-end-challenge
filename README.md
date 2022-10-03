@@ -26,8 +26,8 @@ Hablemos de los **extras**:
  - **La app debería verse bien en cualquier tamaño de ventana, ser "responsive"️:**
  Técnicamente se ve bastante bien en casi todos los tipos de ventana, excepto si pasamos a ventanas muy enanas o vista móvil ya directamente.
  - **Añadir tests unitarios o de integración:** Por falta de tiempo, y en parte inexperiencia, no me ha sido posible añadir tests.
- -**Añadir microinteracciones y animaciones️**: Sinceramente he hecho lo que considero mínimo para que el usuario se sienta acompañado.
- -**Cuidado con la accesibilidad:** Por desgracia es un tema que he dejado para el final y hay completa carencia de accesibilidad. Vendrá en el parche 2.0 🙇🏻
+ - **Añadir microinteracciones y animaciones️**: Sinceramente he hecho lo que considero mínimo para que el usuario se sienta acompañado.
+ - **Cuidado con la accesibilidad:** Por desgracia es un tema que he dejado para el final y hay completa carencia de accesibilidad. Vendrá en el parche 2.0 🙇🏻
  - **Coherencia semántica de etiquetas:** He estado pendiente de este tema, muy posiblemente mejorable, pero en ningún momento cayó en el olvido.
 
 ### Apuntes:
@@ -75,7 +75,7 @@ En ese momento vi la luz al final del túnel por un lado, por otro: había que *
 
 A 2 días de que me comprometí a entregar el proyecto, refactorizarlo todo...
 
-Diría que no fue fácil, pero la verdad le cogí el punto bastante rápido y finalmente lo conseguí, me dediqué a borrar código muerto y intentar llevar las funciones comunes al archivo del contexto para que estuviesen para uso y disfrute de todos los componentes.
+Diría que no fue fácil, pero la verdad le cogí el punto bastante rápido y finalmente lo conseguí, me dediqué a borrar código muerto e intentar llevar las funciones comunes al archivo del contexto para que estuviesen para uso y disfrute de todos los componentes.
 
 ### Deadline 🎉
 
