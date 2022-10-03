@@ -11,6 +11,7 @@ export const PlayerIcon = React.forwardRef<HTMLButtonElement, Props>(
       return pressedPlay(!playing);
     }
 
+    // useEffect(() => pressedPlay(playing), [playing]);
     useEffect(() => setPlaying(isPlaying), [isPlaying]);
     return (
       <Container className={className} onClick={playChanged}>
